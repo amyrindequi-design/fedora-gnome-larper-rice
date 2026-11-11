@@ -1,0 +1,64 @@
+format = """
+[╭─](bold #a855f7)\
+[ 󰣛 ](bg:#a855f7 fg:#09090b bold)\
+[](fg:#a855f7 bg:#1e1b4b)\
+$username\
+$hostname\
+[](fg:#1e1b4b bg:#7f1d1d)\
+$directory\
+[](fg:#7f1d1d bg:#31102f)\
+$git_branch\
+$git_status\
+[](fg:#31102f)\
+$fill\
+$cmd_duration\
+$python\
+$nodejs\
+$rust\
+$time\
+\n[╰─](bold #a855f7)$character"""
+
+[fill]
+symbol = "─"
+style = "bold #3b0764"
+
+[username]
+style_user = "bg:#1e1b4b fg:#e9d5ff bold"
+style_root = "bg:#1e1b4b fg:#ef4444 bold"
+format = "[ $user]($style)"
+show_always = true
+
+[hostname]
+ssh_only = false
+style = "bg:#1e1b4b fg:#a855f7 bold"
+format = "[@$hostname ]($style)"
+
+[directory]
+style = "bg:#7f1d1d fg:#fecaca bold"
+format = "[ 󰉋 $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:#31102f fg:#f472b6 bold"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "bg:#31102f fg:#fbbf24 bold"
+format = "[$all_status$ahead_behind ]($style)"
+
+[cmd_duration]
+min_time = 500
+style = "fg:#f59e0b bold"
+format = "[ 󱎫 $duration ]($style)"
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "fg:#a855f7 bold"
+format = "[ 󰥔 $time ]($style)"
+
+[character]
+success_symbol = "[❯](bold #ef4444)[❯](bold #a855f7)"
+error_symbol = "[✖](bold #ef4444)"

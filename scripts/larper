@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+export PATH="$HOME/.local/bin:$PATH"
+SESSION="larper"
+
+tmux kill-session -t "$SESSION" 2>/dev/null || true
+
+# Create session with Pane 0 (Top-Left: Fastfetch + Interactive Starship Shell)
+tmux new-session -d -s "$SESSION" -n "SKILL-HUNTER" -x 160 -y 48 "bash -i"
+
+# Split horizontally -> Pane 1 (Right: btop)
+tmux split-window -h -p 48 -t "$SESSION:0.0" "btop"
+
+# Split Left pane vertically -> Pane 2 (Bottom-Left: Matrix Chrollo Purple/Red Rain)
+tmux split-window -v -p 38 -t "$SESSION:0.0" "matrix --purple"
+
+# Split Right pane vertically -> Pane 3 (Bottom-Right: Neon Pipes)
+tmux split-window -v -p 32 -t "$SESSION:0.1" "pipes -t 3"
+
+# Focus Top-Left interactive shell pane
+tmux select-pane -t "$SESSION:0.0"
+
+exec tmux attach-session -t "$SESSION"

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    "source": "~/.config/fastfetch/logo.txt",
+    "color": {
+      "1": "38;2;168;85;247",
+      "2": "38;2;220;38;38",
+      "3": "38;2;248;250;252"
+    },
+    "padding": {
+      "top": 1,
+      "left": 2,
+      "right": 3
+    }
+  },
+  "display": {
+    "separator": " ❯ ",
+    "color": {
+      "keys": "38;2;168;85;247",
+      "title": "38;2;239;68;68"
+    },
+    "bar": {
+      "char": {
+        "elapsed": "█",
+        "total": "░"
+      },
+      "width": 14
+    },
+    "percent": {
+      "type": 3
+    }
+  },
+  "modules": [
+    {
+      "type": "title",
+      "format": "{#38;2;168;85;247}╭─── {#38;2;239;68;68;1}󰣛 {user-name-colored}@{host-name-colored}{#38;2;168;85;247} ─── [SKILL HUNTER // SYS.HUD] ───╮"
+    },
+    {
+      "type": "os",
+      "key": "│ 󰣛 Distro  ",
+      "format": "{pretty-name}"
+    },
+    {
+      "type": "kernel",
+      "key": "│ 󰌽 Kernel  ",
+      "format": "{sysname} {release}"
+    },
+    {
+      "type": "wm",
+      "key": "│ 󱂬 WM/Comp ",
+      "format": "{pretty-name} ({protocol-name})"
+    },
+    {
+      "type": "shell",
+      "key": "│ 󰆍 Shell   ",
+      "format": "{pretty-name} {version}"
+    },
+    {
+      "type": "terminal",
+      "key": "│  Term    ",
+      "format": "{pretty-name}"
+    },
+    {
+      "type": "packages",
+      "key": "│ 󰏖 Pkgs    "
+    },
+    {
+      "type": "uptime",
+      "key": "│ 󰅐 Uptime  "
+    },
+    {
+      "type": "custom",
+      "format": "{#38;2;168;85;247}├────────────── [ TELEMETRY // HARDWARE ] ──────────────┤"
+    },
+    {
+      "type": "cpu",
+      "key": "│ 󰻠 CPU     ",
+      "format": "{name} ({cores-logical}T) @ {freq-max}"
+    },
+    {
+      "type": "gpu",
+      "key": "│ 󰢮 GPU     ",
+      "format": "{name}"
+    },
+    {
+      "type": "memory",
+      "key": "│ 󰍛 Memory  "
+    },
+    {
+      "type": "disk",
+      "key": "│ 󰋊 Disk    ",
+      "folders": "/"
+    },
+    {
+      "type": "battery",
+      "key": "│ 󰁹 Battery "
+    },
+    {
+      "type": "custom",
+      "format": "{#38;2;168;85;247}╰───────────────────────────────────────────────────────╯"
+    },
+    {
+      "type": "colors",
+      "paddingLeft": 2,
+      "symbol": "circle"
+    }
+  ]
+}

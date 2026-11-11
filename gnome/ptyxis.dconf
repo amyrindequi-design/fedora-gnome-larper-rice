@@ -1,0 +1,11 @@
+[/]
+default-columns=uint32 165
+default-profile-uuid='862986c85c6e6ee42c07cdf46ae938b1'
+default-rows=uint32 45
+font-name='JetBrainsMono Nerd Font 10.5'
+profile-uuids=['862986c85c6e6ee42c07cdf46ae938b1']
+use-system-font=false
+window-size=(uint32 230, uint32 46)
+
+[Profiles/862986c85c6e6ee42c07cdf46ae938b1]
+opacity=0.83999999999999997

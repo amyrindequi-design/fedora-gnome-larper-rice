@@ -1,0 +1,27 @@
+[/]
+debug=false
+power-saver=false
+settings-version=8
+
+[applications]
+blur=true
+dynamic-opacity=false
+opacity=215
+whitelist=['org.gnome.Nautilus', 'nautilus', 'org.gnome.Ptyxis', 'ptyxis']
+
+[dash-to-dock]
+blur=true
+brightness=0.75
+override-background=true
+sigma=40
+static-blur=false
+style-dash-to-dock=0
+
+[panel]
+blur=true
+brightness=0.75
+override-background=true
+sigma=40
+static-blur=false
+style-panel=0
+unblur-in-overview=false

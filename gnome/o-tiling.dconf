@@ -1,0 +1,16 @@
+[/]
+active-hint=false
+active-hint-border-radius=uint32 12
+active-hint-border-width=uint32 2
+active-hint-overlay-enabled=false
+cleared-system-bindings='{"focus-left":[{"schema_id":"org.gnome.desktop.wm.keybindings","key":"switch-to-workspace-left","accelerator":"<Super><Alt>Left","expected":["<Super>Page_Up","<Super>KP_Prior","<Control><Alt>Left"]},{"schema_id":"org.gnome.desktop.wm.keybindings","key":"minimize","accelerator":"<Super>h","expected":[]}],"focus-down":[{"schema_id":"org.gnome.shell.keybindings","key":"shift-overview-down","accelerator":"<Super><Alt>Down","expected":[]}],"focus-up":[{"schema_id":"org.gnome.shell.keybindings","key":"shift-overview-up","accelerator":"<Super><Alt>Up","expected":[]}],"focus-right":[{"schema_id":"org.gnome.desktop.wm.keybindings","key":"switch-to-workspace-right","accelerator":"<Super><Alt>Right","expected":["<Super>Page_Down","<Super>KP_Next","<Control><Alt>Right"]}],"toggle-stacking-global":[{"schema_id":"org.gnome.shell.keybindings","key":"toggle-quick-settings","accelerator":"<Super>s","expected":[]}],"pop-workspace-up":[{"schema_id":"org.gnome.desktop.wm.keybindings","key":"move-to-monitor-up","accelerator":"<Super><Shift>Up","expected":[]},{"schema_id":"org.gnome.desktop.wm.keybindings","key":"move-to-monitor-left","accelerator":"<Super><Shift>Left","expected":[]}],"pop-workspace-down":[{"schema_id":"org.gnome.desktop.wm.keybindings","key":"move-to-monitor-down","accelerator":"<Super><Shift>Down","expected":[]},{"schema_id":"org.gnome.desktop.wm.keybindings","key":"move-to-monitor-right","accelerator":"<Super><Shift>Right","expected":[]}],"workspace-switch-1":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-1","accelerator":"<Super>1","expected":[]}],"workspace-switch-2":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-2","accelerator":"<Super>2","expected":[]}],"workspace-switch-3":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-3","accelerator":"<Super>3","expected":[]}],"workspace-switch-4":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-4","accelerator":"<Super>4","expected":[]}],"workspace-switch-5":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-5","accelerator":"<Super>5","expected":[]}],"workspace-switch-6":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-6","accelerator":"<Super>6","expected":[]}],"workspace-switch-7":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-7","accelerator":"<Super>7","expected":[]}],"workspace-switch-8":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-8","accelerator":"<Super>8","expected":[]}],"workspace-switch-9":[{"schema_id":"org.gnome.shell.keybindings","key":"switch-to-application-9","accelerator":"<Super>9","expected":[]}]}'
+disabled-workspaces='[]'
+gap-inner=uint32 8
+gap-outer=uint32 8
+hide-panel-icon=true
+pop-workspace-down=['<Super><Shift>Down', '<Super><Shift>Right', '<Super><Shift>j']
+pop-workspace-up=['<Super><Shift>Up', '<Super><Shift>Left', '<Super><Shift>k']
+quick-settings-toggle=true
+tile-by-default=true
+toggle-tiling=['<Super><Shift>t']
+workspace-number-shortcuts=true

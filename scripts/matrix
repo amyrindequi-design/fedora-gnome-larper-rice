@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+import curses
+import random
+import sys
+import time
+
+CHARS = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ012345789:・.=*+-<>¦｜╌"
+
+def main(stdscr):
+    curses.curs_set(0)
+    stdscr.nodelay(True)
+    stdscr.timeout(45)
+    curses.start_color()
+    curses.use_default_colors()
+
+    mode = "green"
+    if "--purple" in sys.argv:
+        mode = "purple"
+    elif "--red" in sys.argv:
+        mode = "red"
+
+    if mode == "purple":
+        curses.init_pair(1, curses.COLOR_WHITE, -1)
+        curses.init_pair(2, curses.COLOR_MAGENTA, -1)
+        curses.init_pair(3, curses.COLOR_RED, -1)
+    elif mode == "red":
+        curses.init_pair(1, curses.COLOR_WHITE, -1)
+        curses.init_pair(2, curses.COLOR_RED, -1)
+        curses.init_pair(3, curses.COLOR_MAGENTA, -1)
+    else:
+        curses.init_pair(1, curses.COLOR_WHITE, -1)
+        curses.init_pair(2, curses.COLOR_GREEN, -1)
+        curses.init_pair(3, curses.COLOR_CYAN, -1)
+
+    sh, sw = stdscr.getmaxyx()
+    drops = [random.randint(-sh, 0) for _ in range(sw)]
+    lengths = [random.randint(6, max(8, sh // 2)) for _ in range(sw)]
+    speeds = [random.choice([1, 1, 2]) for _ in range(sw)]
+
+    while True:
+        ch = stdscr.getch()
+        if ch in (ord('q'), ord('Q'), 27):
+            break
+        nh, nw = stdscr.getmaxyx()
+        if (nh, nw) != (sh, sw):
+            sh, sw = nh, nw
+            drops = [random.randint(-sh, 0) for _ in range(sw)]
+            lengths = [random.randint(6, max(8, sh // 2)) for _ in range(sw)]
+            speeds = [random.choice([1, 1, 2]) for _ in range(sw)]
+            stdscr.clear()
+
+        for x in range(0, sw - 1, 2):
+            y = drops[x]
+            length = lengths[x]
+            if 0 <= y < sh:
+                try:
+                    stdscr.addstr(y, x, random.choice(CHARS), curses.color_pair(1) | curses.A_BOLD)
+                except curses.error:
+                    pass
+            if 0 <= y - 1 < sh:
+                try:
+                    stdscr.addstr(y - 1, x, random.choice(CHARS), curses.color_pair(2) | curses.A_BOLD)
+                except curses.error:
+                    pass
+            if 0 <= y - length // 2 < sh:
+                try:
+                    stdscr.addstr(y - length // 2, x, random.choice(CHARS), curses.color_pair(3))
+                except curses.error:
+                    pass
+            if 0 <= y - length < sh:
+                try:
+                    stdscr.addstr(y - length, x, " ")
+                except curses.error:
+                    pass
+
+            drops[x] += speeds[x]
+            if drops[x] - length > sh:
+                drops[x] = random.randint(-15, 0)
+                lengths[x] = random.randint(6, max(8, sh // 2))
+
+        stdscr.refresh()
+
+if __name__ == "__main__":
+    try:
+        curses.wrapper(main)
+    except KeyboardInterrupt:
+        pass
