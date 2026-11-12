@@ -222,8 +222,9 @@ apply_gnome_settings() {
     echo "[6/7] Aplicando tema escuro, botões de janela, Ptyxis, Blur, Cubo 3D e Burn My Windows..."
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || true
     gsettings set org.gnome.desktop.interface accent-color 'yellow' || true
-    gsettings set org.gnome.desktop.interface clock-show-date true
-    gsettings set org.gnome.desktop.interface clock-show-weekday true
+    gsettings set org.gnome.desktop.interface clock-show-date false
+    gsettings set org.gnome.desktop.interface clock-show-weekday false
+    gsettings set org.gnome.desktop.interface clock-show-seconds false
     gsettings set org.gnome.desktop.interface show-battery-percentage true
     gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrains Mono 10'
 
@@ -249,6 +250,12 @@ apply_gnome_settings() {
     fi
     if [ -s "$REPO_DIR/gnome/clipboard-indicator.dconf" ]; then
         dconf load /org/gnome/shell/extensions/clipboard-indicator/ < "$REPO_DIR/gnome/clipboard-indicator.dconf"
+    fi
+    if [ -s "$REPO_DIR/gnome/vitals.dconf" ]; then
+        dconf load /org/gnome/shell/extensions/vitals/ < "$REPO_DIR/gnome/vitals.dconf"
+    fi
+    if [ -s "$REPO_DIR/gnome/hacker-music.dconf" ]; then
+        dconf load /org/gnome/shell/extensions/hacker-music/ < "$REPO_DIR/gnome/hacker-music.dconf"
     fi
 
     dconf load /org/gnome/Ptyxis/ < "$REPO_DIR/gnome/ptyxis.dconf" || true
