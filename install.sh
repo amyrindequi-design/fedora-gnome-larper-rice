@@ -71,6 +71,7 @@ gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 dconf load /org/gnome/shell/extensions/blur-my-shell/ < "$REPO_DIR/gnome/blur-my-shell.dconf"
 dconf load /org/gnome/shell/extensions/desktop-cube/ < "$REPO_DIR/gnome/desktop-cube.dconf"
+dconf write /org/gnome/shell/extensions/desktop-cube/background-panorama "'$HOME/Imagens/Wallpapers-Linux/cube-skybox-geneiryodan.png'"
 dconf load /org/gnome/shell/extensions/dash-to-dock/ < "$REPO_DIR/gnome/dash-to-dock.dconf"
 dconf load /org/gnome/shell/extensions/o-tiling/ < "$REPO_DIR/gnome/o-tiling.dconf"
 dconf load /org/gnome/Ptyxis/ < "$REPO_DIR/gnome/ptyxis.dconf"

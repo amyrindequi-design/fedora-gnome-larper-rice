@@ -1,6 +1,8 @@
 [/]
 do-explode=true
-horizontal-stretch=120
-inactive-workpace-opacity=190
-window-parallax=0.84999999999999998
-workpace-separation=100
+horizontal-stretch=160
+inactive-workpace-opacity=150
+last-first-gap=false
+mouse-rotation-speed=2.5
+window-parallax=1.0
+workpace-separation=260
