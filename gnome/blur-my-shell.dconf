@@ -1,7 +1,7 @@
 [/]
 debug=false
 power-saver=false
-settings-version=8
+settings-version=10
 
 [applications]
 blur=true
@@ -25,3 +25,6 @@ sigma=40
 static-blur=false
 style-panel=0
 unblur-in-overview=false
+
+[popup]
+screenshot-corner-radius=36

@@ -42,20 +42,26 @@ Setup completo de customização (**Rice / Linux Larper**) para **Fedora Worksta
 
 ---
 
-## ⚡ Instalação Automática (1 Comando)
+## ⚡ Clonar Meu OS Inteiro em 1 Comando
 
-Se você usa **Fedora Workstation (GNOME)**, basta clonar este repositório e rodar o script `install.sh` (não precisa nem de `sudo` para as ferramentas do terminal):
+Se você usa **Fedora Workstation (GNOME)** (ou outra distro GNOME 45+ como Ubuntu/Arch), cole **este único comando** no terminal:
 
 ```bash
-git clone https://github.com/amyrindequi-design/fedora-gnome-larper-rice.git
-cd fedora-gnome-larper-rice
-chmod +x install.sh
-./install.sh
+curl -fsSL https://raw.githubusercontent.com/amyrindequi-design/fedora-gnome-larper-rice/main/install.sh | bash
 ```
 
+O instalador faz tudo sozinho (e ainda cria backup dos seus dotfiles antigos em `~/.config/larper-backup-*`):
+- Verifica/instala dependências básicas (`tmux`, `unzip`, `xz`, `glib2`, etc.) se faltarem.
+- Instala `fastfetch`, `starship`, `btop`, `yazi` e a **JetBrainsMono Nerd Font**.
+- Copia os scripts (`larper`, `matrix`, `pipes`, `gerar-skybox.py`) e todas as configs do terminal/tmux.
+- Aplica os wallpapers (incluindo o **Skybox 360°**), tema escuro, fonte, botões de janela, **Ptyxis transparente**, **Blur my Shell**, **Desktop Cube**, **Burn My Windows** (`Glitch` + `Matrix` + `TV Glitch` + `Hexagon`) e **O-Tiling**.
+- Baixa/ativa todas as extensões do GNOME + instala e compila a extensão custom **`hacker-transition@amyrindequi.github.io`** (shader GLSL + HUD tático Cairo).
+
 Depois que terminar:
-1. Abra um novo terminal para ver o novo **Fastfetch + Starship**.
-2. Digite `larper` para abrir o **Skill Hunter Deck** (painel 4-em-1 com `fastfetch`, `btop`, `matrix --purple` e `pipes`).
+1. Abra um novo terminal para ver o **Fastfetch + Starship** e digite `larper` para abrir o **Skill Hunter Deck**.
+2. Encerre a sessão e entre novamente no GNOME para ativar todas as extensões visuais (**Cubo 3D + Transição Hacker + Blur**).
+
+> *(Alternativa manual via `git clone`: `git clone https://github.com/amyrindequi-design/fedora-gnome-larper-rice.git && bash fedora-gnome-larper-rice/install.sh`)*
 
 ---
 
@@ -177,8 +183,11 @@ chmod +x ~/.local/bin/larper ~/.local/bin/matrix ~/.local/bin/pipes
 │   ├── blur-my-shell.dconf                        # Blur no Nautilus, Ptyxis, Dock e Painel
 │   ├── desktop-cube.dconf                         # Parallax 3D, Skybox e separação de faces do Cubo
 │   ├── burn-my-windows.dconf                      # Perfil ativo de efeitos de janela
+│   ├── compiz-windows-effect.dconf                # Janelas gelatinosas / elásticas
 │   ├── dash-to-dock.dconf                         # Configurações da dock
-│   ├── o-tiling.dconf                             # Tiling de janelas
+│   ├── o-tiling.dconf                             # Tiling de janelas e atalhos
+│   ├── caffeine.dconf                             # Configurações do Caffeine
+│   ├── clipboard-indicator.dconf                  # Atalho <Super>v do histórico da área de transferência
 │   ├── ptyxis.dconf                               # Fonte Nerd Font + opacidade 84% no terminal
 │   └── enabled-extensions.txt                     # Lista de extensões GNOME utilizadas
 ├── scripts/

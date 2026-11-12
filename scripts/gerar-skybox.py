@@ -2,7 +2,11 @@
 """Gera um panorama equiretangular 360° (skybox) cyberpunk roxo/carmesim para o Desktop Cube."""
 import math
 import random
+from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+HOME = Path.home()
+FONT_DIR = HOME / ".local/share/fonts/JetBrainsMonoNerd"
 
 W, H = 4096, 2048
 HZ = H // 2  # horizonte
@@ -88,7 +92,7 @@ for mx, my, mr in moons:
     spider(draw, mx, my - mr * 0.05, mr * 0.95, (12, 4, 18, 245))
     # número 0 da trupe
     try:
-        f = ImageFont.truetype("/home/amyr/.local/share/fonts/JetBrainsMonoNerd/JetBrainsMonoNerdFont-ExtraBold.ttf", int(mr * 0.22))
+        f = ImageFont.truetype(str(FONT_DIR / "JetBrainsMonoNerdFont-ExtraBold.ttf"), int(mr * 0.22))
     except OSError:
         f = ImageFont.load_default()
     draw.text((mx, my + mr * 0.16), "0", font=f, fill=(248, 250, 252, 230), anchor="mm")
@@ -146,8 +150,7 @@ draw.line([(0, HZ), (W, HZ)], fill=(255, 210, 230, 255), width=2)
 
 # --- Textos HUD flutuando no céu (um em cada face) ---
 try:
-    mono = ImageFont.truetype(
-        "/home/amyr/.local/share/fonts/JetBrainsMonoNerd/JetBrainsMonoNerdFont-Bold.ttf", 46)
+    mono = ImageFont.truetype(str(FONT_DIR / "JetBrainsMonoNerdFont-Bold.ttf"), 46)
 except OSError:
     mono = ImageFont.load_default()
 labels = [
@@ -162,6 +165,8 @@ for lx, txt in labels:
 for y in range(0, H, 4):
     draw.line([(0, y), (W, y)], fill=(0, 0, 0, 22))
 
-out = "/home/amyr/Imagens/Wallpapers-Linux/cube-skybox-geneiryodan.png"
+out_dir = HOME / "Imagens/Wallpapers-Linux"
+out_dir.mkdir(parents=True, exist_ok=True)
+out = out_dir / "cube-skybox-geneiryodan.png"
 img.save(out, optimize=True)
 print("salvo:", out)

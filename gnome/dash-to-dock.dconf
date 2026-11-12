@@ -14,7 +14,6 @@ height-fraction=0.90000000000000002
 max-alpha=0.25
 min-alpha=0.17999999999999999
 preferred-monitor=-2
-preferred-monitor-by-connector='eDP-1'
 running-indicator-style='DOTS'
 show-trash=false
 transparency-mode='FIXED'
