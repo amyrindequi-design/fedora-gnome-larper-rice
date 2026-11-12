@@ -400,13 +400,18 @@ class HackerMusicIndicator extends PanelMenu.Button {
             can_focus: true,
             y_align: Clutter.ActorAlign.CENTER,
         });
-        // Prevent inline media clicks from opening the panel popup menu.
-        btn.connect('button-press-event', () => Clutter.EVENT_STOP);
         btn.connect('clicked', () => {
             onClick();
             return Clutter.EVENT_STOP;
         });
         return btn;
+    }
+
+    vfunc_event(event) {
+        const src = event.get_source();
+        if (src && this._controlsBox?.contains(src))
+            return Clutter.EVENT_PROPAGATE;
+        return super.vfunc_event(event);
     }
 
     _buildPopupCard() {
@@ -670,6 +675,8 @@ class HackerMusicIndicator extends PanelMenu.Button {
             : (client.title || client.identity || 'MPRIS Stream');
         this._topLabel.text = trackText;
         this._playBtn.label = isPlaying ? '❚❚' : '▶';
+        this._prevBtn.opacity = client.canGoPrev ? 255 : 95;
+        this._nextBtn.opacity = client.canGoNext ? 255 : 95;
 
         const stateTag = isPlaying ? 'STREAM_LIVE' : 'STREAM_PAUSED';
         this._cardHeader.text = `[ MPRIS // ${stateTag} ]`;
@@ -680,6 +687,8 @@ class HackerMusicIndicator extends PanelMenu.Button {
         this._artistLabel.text = client.artist || client.identity;
         this._albumLabel.text = client.album || '';
         this._cardPlay.label = isPlaying ? '❚❚ PAUSE' : '▶ PLAY';
+        this._cardPrev.opacity = client.canGoPrev ? 255 : 95;
+        this._cardNext.opacity = client.canGoNext ? 255 : 95;
 
         this._updateAlbumArt(client.artUrl);
         this._updateProgressBar(client.positionUs, client.lengthUs);
