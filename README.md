@@ -2,6 +2,7 @@
 
 Setup completo de customização (**Rice / Linux Larper**) para **Fedora Workstation (GNOME Wayland)** inspirado em **Hunter x Hunter (Chrollo Lucilfer / Trupe Fantasma)**, combinando:
 - **Cubo 3D + Skybox 360° + Transição Hacker GLSL** (`Desktop Cube` + extensão custom `Hacker Workspace Transition` com glitch cromático, chuva Matrix, scanlines laser e HUD tático em Cairo ao trocar de área de trabalho)
+- **Hacker Music HUD na Barra Superior** (extensão custom GNOME 45–51 `Hacker Music HUD` com equalizador Cairo animado, controles rápidos inline `‹ ▶/❚❚ ›`, capa do álbum via MPRIS/Soup e barra de progresso em tempo real)
 - **Janelas em Vidro Fosco (Blur + Transparência)** no Terminal (`Ptyxis`) e Gerenciador de Arquivos (`Nautilus`)
 - **Efeitos Hacker de Janela (`Burn My Windows`)**: aleatorizando `Glitch` (`#00ff88`), `Matrix`, `TV Glitch` (`#a855f7`) e `Hexagon` ao abrir/fechar janelas + **Janelas Elásticas** (`Compiz Wobbly Windows`)
 - **Fastfetch Customizado** com a Aranha de 12 patas + Cruz Invertida (`GEN'EI RYODAN // NO.0`) e HUD de telemetria (`[SKILL HUNTER // SYS.HUD]`)
@@ -56,11 +57,11 @@ O instalador faz tudo sozinho (e ainda cria backup dos seus dotfiles antigos em 
 - Instala `fastfetch`, `starship`, `btop`, `yazi` e a **JetBrainsMono Nerd Font**.
 - Copia os scripts (`larper`, `matrix`, `pipes`, `gerar-skybox.py`) e todas as configs do terminal/tmux.
 - Aplica os wallpapers (incluindo o **Skybox 360°**), tema escuro, fonte, botões de janela, **Ptyxis transparente**, **Blur my Shell**, **Desktop Cube**, **Burn My Windows** (`Glitch` + `Matrix` + `TV Glitch` + `Hexagon`) e **O-Tiling**.
-- Baixa/ativa todas as extensões do GNOME + instala e compila a extensão custom **`hacker-transition@amyrindequi.github.io`** (shader GLSL + HUD tático Cairo).
+- Baixa/ativa todas as extensões do GNOME + instala e compila as extensões custom **`hacker-transition@amyrindequi.github.io`** (shader GLSL + HUD tático Cairo) e **`hacker-music@amyrindequi.github.io`** (widget de música MPRIS com equalizador neon na barra superior).
 
 Depois que terminar:
 1. Abra um novo terminal para ver o **Fastfetch + Starship** e digite `larper` para abrir o **Skill Hunter Deck**.
-2. Encerre a sessão e entre novamente no GNOME para ativar todas as extensões visuais (**Cubo 3D + Transição Hacker + Blur**).
+2. Encerre a sessão e entre novamente no GNOME para ativar todas as extensões visuais (**Cubo 3D + Transição Hacker + Music HUD + Blur**).
 
 > *(Alternativa manual via `git clone`: `git clone https://github.com/amyrindequi-design/fedora-gnome-larper-rice.git && bash fedora-gnome-larper-rice/install.sh`)*
 
@@ -101,10 +102,11 @@ Instale pelo **Extension Manager** (ou pelo site [extensions.gnome.org](https://
 - **Desktop Cube** (`desktop-cube@schneegans.github.com`) — Troca de área de trabalho em cubo 3D com parallax e skybox panorâmico 360°.
 - **Burn My Windows** (`burn-my-windows@schneegans.github.com`) — Desintegra janelas com efeitos `Glitch`, `Matrix`, `TV Glitch` e `Hexagon` em `#00ff88` e `#a855f7`.
 - **Hacker Workspace Transition** (`gnome/extensions/hacker-transition@amyrindequi.github.io`) — Extensão custom GNOME 45–51 incluída neste repo: aplica shader GLSL (`HackerGlitchShader`) + HUD tático Cairo (`SYS://CUBE_BUS NODE_0X >> NODE_0Y`) nas transições de área de trabalho junto com o Cubo 3D.
+- **Hacker Music HUD** (`gnome/extensions/hacker-music@amyrindequi.github.io`) — Extensão custom GNOME 45–51 incluída neste repo: widget de música MPRIS na barra superior com espectro Cairo neon, controles rápidos (`‹ ▶/❚❚ ›`) e card popup com capa do álbum e troca de player.
 - **Compiz windows effect** (`compiz-windows-effect@hermes83.github.com`) — Janelas elásticas/gelatinosas ao arrastar.
 - **Dash to Dock** (`dash-to-dock@micxgx.gmail.com`) + **Transparent Top Bar** (`transparent-top-bar@ftpix.com`) + **O-Tiling** (`o-tiling@oliwebd.github.com`).
 
-Aplique os ajustes finos do Cubo 3D, Skybox, Burn My Windows e instale a extensão local:
+Aplique os ajustes finos do Cubo 3D, Skybox, Burn My Windows e instale as extensões locais:
 ```bash
 # Fixar 4 áreas de trabalho para formar as 4 faces do cubo 3D
 gsettings set org.gnome.mutter dynamic-workspaces false
@@ -114,10 +116,12 @@ gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 dconf load /org/gnome/shell/extensions/desktop-cube/ < gnome/desktop-cube.dconf
 dconf write /org/gnome/shell/extensions/desktop-cube/background-panorama "'$HOME/Imagens/Wallpapers-Linux/cube-skybox-geneiryodan.png'"
 
-# Instalar extensão custom Hacker Workspace Transition
-mkdir -p ~/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io
-cp -r gnome/extensions/hacker-transition@amyrindequi.github.io/* ~/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io/
-glib-compile-schemas ~/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io/schemas/
+# Instalar extensões custom (Transição Hacker + Music HUD)
+for ext in hacker-transition@amyrindequi.github.io hacker-music@amyrindequi.github.io; do
+  mkdir -p ~/.local/share/gnome-shell/extensions/$ext
+  cp -r gnome/extensions/$ext/* ~/.local/share/gnome-shell/extensions/$ext/
+  glib-compile-schemas ~/.local/share/gnome-shell/extensions/$ext/schemas/
+done
 
 # Copiar perfil Glitch + Matrix + TV Glitch + Hexagon para o Burn My Windows
 mkdir -p ~/.config/burn-my-windows/profiles
@@ -180,6 +184,7 @@ chmod +x ~/.local/bin/larper ~/.local/bin/matrix ~/.local/bin/pipes
 │       └── logo.txt                               # Arte ASCII Aranha Nº 0 + Cruz Invertida
 ├── gnome/
 │   ├── extensions/
+│   │   ├── hacker-music@amyrindequi.github.io/      # Widget de música MPRIS com equalizador neon
 │   │   └── hacker-transition@amyrindequi.github.io/ # Extensão custom GLSL + HUD tático Cairo
 │   ├── blur-my-shell.dconf                        # Blur no Nautilus, Ptyxis, Dock e Painel
 │   ├── desktop-cube.dconf                         # Parallax 3D, Skybox e separação de faces do Cubo

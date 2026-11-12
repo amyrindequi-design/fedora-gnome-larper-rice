@@ -11,3 +11,4 @@ desktop-cube@schneegans.github.com
 burn-my-windows@schneegans.github.com
 compiz-windows-effect@hermes83.github.com
 hacker-transition@amyrindequi.github.io
+hacker-music@amyrindequi.github.io

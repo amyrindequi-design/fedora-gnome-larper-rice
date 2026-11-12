@@ -314,12 +314,17 @@ print(d.get(ver, {}).get('pk', ''))
         fi
     done
 
-    local hacker_ext_dst="$HOME/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io"
-    mkdir -p "$hacker_ext_dst"
-    cp -rf "$REPO_DIR/gnome/extensions/hacker-transition@amyrindequi.github.io/"* "$hacker_ext_dst/"
-    if command -v glib-compile-schemas >/dev/null 2>&1; then
-        glib-compile-schemas "$hacker_ext_dst/schemas/"
-    fi
+    for local_uuid in hacker-transition@amyrindequi.github.io hacker-music@amyrindequi.github.io; do
+        local ext_src="$REPO_DIR/gnome/extensions/$local_uuid"
+        local ext_dst="$HOME/.local/share/gnome-shell/extensions/$local_uuid"
+        if [[ -d "$ext_src" ]]; then
+            mkdir -p "$ext_dst"
+            cp -rf "$ext_src/"* "$ext_dst/"
+            if [[ -d "$ext_dst/schemas" ]] && command -v glib-compile-schemas >/dev/null 2>&1; then
+                glib-compile-schemas "$ext_dst/schemas/"
+            fi
+        fi
+    done
 
     # Garante todas as extensões na chave enabled-extensions mesmo antes do próximo login
     python3 - <<'PY' || true
@@ -337,6 +342,7 @@ desired = [
     'burn-my-windows@schneegans.github.com',
     'compiz-windows-effect@hermes83.github.com',
     'hacker-transition@amyrindequi.github.io',
+    'hacker-music@amyrindequi.github.io',
 ]
 cur = subprocess.check_output(['gsettings', 'get', 'org.gnome.shell', 'enabled-extensions'], text=True).strip()
 exts = [] if cur == '@as []' else ast.literal_eval(cur)
@@ -371,7 +377,7 @@ main() {
     echo ""
     echo "✔ OS Larper clonado com sucesso!"
     echo "  1) Abra um novo terminal para ver Fastfetch + Starship e digite 'larper' para o Skill Hunter Deck."
-    echo "  2) Encerre a sessão e faça login novamente no GNOME para ativar todas as extensões (Cubo 3D + Skybox + Transição Hacker + Blur)."
+    echo "  2) Encerre a sessão e faça login novamente no GNOME para ativar todas as extensões (Cubo 3D + Skybox + Transição Hacker + Music HUD + Blur)."
 }
 
 main "$@"

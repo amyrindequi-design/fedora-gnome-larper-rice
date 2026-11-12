@@ -1,0 +1,17 @@
+{
+  "uuid": "hacker-music@amyrindequi.github.io",
+  "name": "Hacker Music HUD",
+  "description": "Sleek cyberpunk MPRIS music controller with animated neon equalizer, inline top-bar transport controls, and album art card.",
+  "version": 1,
+  "shell-version": [
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51"
+  ],
+  "settings-schema": "org.gnome.shell.extensions.hacker-music",
+  "url": "https://github.com/amyrindequi-design/fedora-gnome-larper-rice"
+}

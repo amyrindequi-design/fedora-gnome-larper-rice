@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.hacker-music" path="/org/gnome/shell/extensions/hacker-music/">
+    <key name="panel-box" type="s">
+      <default>'center'</default>
+      <summary>Panel box placement (left, center, or right)</summary>
+    </key>
+    <key name="panel-index" type="i">
+      <default>1</default>
+      <summary>Position index inside the chosen panel box</summary>
+    </key>
+    <key name="show-when-idle" type="b">
+      <default>true</default>
+      <summary>Show subtle IDLE indicator when no MPRIS player is active</summary>
+    </key>
+    <key name="max-label-width" type="i">
+      <default>220</default>
+      <summary>Maximum pixel width of the top-bar track label</summary>
+    </key>
+  </schema>
+</schemalist>

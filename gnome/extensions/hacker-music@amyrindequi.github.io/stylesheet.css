@@ -1,0 +1,153 @@
+.hacker-music-pill {
+    background-color: rgba(10, 6, 18, 0.72);
+    border: 1px solid rgba(168, 85, 247, 0.55);
+    border-radius: 999px;
+    padding: 2px 10px;
+    margin: 3px 4px;
+    transition-duration: 180ms;
+}
+
+.hacker-music-pill-playing {
+    border-color: rgba(0, 255, 136, 0.72);
+    background-color: rgba(12, 8, 22, 0.84);
+}
+
+.hacker-music-pill-idle {
+    border-color: rgba(148, 163, 184, 0.35);
+    background-color: rgba(10, 6, 18, 0.55);
+}
+
+.hacker-music-label {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.hacker-music-label-idle {
+    color: #a855f7;
+    font-size: 10.5px;
+}
+
+.hacker-music-btn {
+    padding: 1px 5px;
+    border-radius: 6px;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.hacker-music-btn:hover {
+    color: #00ff88;
+    background-color: rgba(0, 255, 136, 0.14);
+}
+
+.hacker-music-btn-play {
+    color: #a855f7;
+}
+
+.hacker-music-btn-play:hover {
+    color: #00ff88;
+}
+
+.hacker-music-card {
+    background-color: rgba(10, 6, 18, 0.94);
+    border: 1px solid rgba(168, 85, 247, 0.55);
+    border-radius: 14px;
+    padding: 14px;
+    min-width: 320px;
+}
+
+.hacker-music-card-header {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #00ff88;
+    margin-bottom: 8px;
+}
+
+.hacker-music-source-btn {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #d8b4fe;
+    background-color: rgba(168, 85, 247, 0.18);
+    border: 1px solid rgba(168, 85, 247, 0.45);
+    border-radius: 6px;
+    padding: 2px 7px;
+}
+
+.hacker-music-source-btn:hover {
+    background-color: rgba(168, 85, 247, 0.35);
+    color: #ffffff;
+}
+
+.hacker-music-art-box {
+    background-color: rgba(24, 16, 40, 0.9);
+    border: 1px solid rgba(168, 85, 247, 0.45);
+    border-radius: 10px;
+    width: 72px;
+    height: 72px;
+}
+
+.hacker-music-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.hacker-music-artist {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #a855f7;
+}
+
+.hacker-music-album {
+    font-size: 10.5px;
+    color: #94a3b8;
+}
+
+.hacker-music-time {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.hacker-music-progress-track {
+    background-color: rgba(148, 163, 184, 0.22);
+    border-radius: 999px;
+    height: 5px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.hacker-music-progress-fill {
+    background-color: #00ff88;
+    border-radius: 999px;
+    height: 5px;
+}
+
+.hacker-music-ctrl-btn {
+    background-color: rgba(30, 20, 48, 0.85);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    border-radius: 999px;
+    padding: 6px 14px;
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.hacker-music-ctrl-btn:hover {
+    background-color: rgba(168, 85, 247, 0.32);
+    border-color: #00ff88;
+    color: #00ff88;
+}
+
+.hacker-music-ctrl-btn-main {
+    background-color: rgba(0, 255, 136, 0.16);
+    border-color: rgba(0, 255, 136, 0.72);
+    color: #00ff88;
+    padding: 6px 18px;
+}
