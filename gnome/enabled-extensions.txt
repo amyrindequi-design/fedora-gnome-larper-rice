@@ -1,12 +1,13 @@
-dash-to-dock@micxgx.gmail.com
-blur-my-shell@aunetx
 appindicatorsupport@rgcjonas.gmail.com
 transparent-top-bar@ftpix.com
 clipboard-indicator@tudmotu.com
 Vitals@CoreCoding.com
 caffeine@patapon.info
+background-logo@fedorahosted.org
 o-tiling@oliwebd.github.com
+dash-to-dock@micxgx.gmail.com
+blur-my-shell@aunetx
 desktop-cube@schneegans.github.com
 burn-my-windows@schneegans.github.com
 compiz-windows-effect@hermes83.github.com
-background-logo@fedorahosted.org
+hacker-transition@amyrindequi.github.io

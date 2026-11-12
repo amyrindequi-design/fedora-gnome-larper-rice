@@ -97,5 +97,21 @@ for UUID in \
     fi
 done
 
+echo "[6b] Instalando extensão local Hacker Workspace Transition..."
+HACKER_EXT_DST="$HOME/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io"
+mkdir -p "$HACKER_EXT_DST"
+cp -rf "$REPO_DIR/gnome/extensions/hacker-transition@amyrindequi.github.io/"* "$HACKER_EXT_DST/"
+if command -v glib-compile-schemas >/dev/null 2>&1; then
+    glib-compile-schemas "$HACKER_EXT_DST/schemas/"
+fi
+python3 - <<'PY' || true
+import ast, subprocess
+cur = subprocess.check_output(['gsettings', 'get', 'org.gnome.shell', 'enabled-extensions'], text=True).strip()
+exts = [] if cur == '@as []' else ast.literal_eval(cur)
+if 'hacker-transition@amyrindequi.github.io' not in exts:
+    exts.append('hacker-transition@amyrindequi.github.io')
+    subprocess.check_call(['gsettings', 'set', 'org.gnome.shell', 'enabled-extensions', str(exts)])
+PY
+
 echo ""
-echo "✔ Instalação concluída! Abra um novo terminal ou digite 'larper' para abrir o Skill Hunter Deck."
+echo "✔ Instalação concluída! Abra um novo terminal, digite 'larper' para o Skill Hunter Deck e encerre/entre novamente na sessão GNOME para ativar as extensões."

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.hacker-transition"
+          path="/org/gnome/shell/extensions/hacker-transition/">
+
+    <key name="enable-shader" type="b">
+      <default>true</default>
+      <summary>Enable GLSL Hacker Glitch Shader</summary>
+      <description>Apply real-time GLSL chromatic split, scanline glitch and matrix sweep on workspace faces.</description>
+    </key>
+
+    <key name="glitch-windows" type="b">
+      <default>true</default>
+      <summary>Glitch Floating Windows</summary>
+      <description>Also apply the cyber-glitch shader to transitioning window clones while preserving 3D parallax.</description>
+    </key>
+
+    <key name="enable-hud" type="b">
+      <default>true</default>
+      <summary>Enable Tactical Hacker HUD Overlay</summary>
+      <description>Display a 60fps Cairo terminal packet stream, signal waveform, and node-lock banner during switches.</description>
+    </key>
+
+    <key name="shader-intensity" type="d">
+      <default>1.0</default>
+      <range min="0.2" max="2.0" />
+      <summary>Shader Intensity</summary>
+      <description>Strength multiplier for glitch displacement and matrix overlays.</description>
+    </key>
+
+    <key name="primary-color" type="s">
+      <default>'#00ff88'</default>
+      <summary>Primary Hacker Neon Color</summary>
+      <description>Matrix green accent color for scanlines, rain, and HUD elements.</description>
+    </key>
+
+    <key name="secondary-color" type="s">
+      <default>'#a855f7'</default>
+      <summary>Secondary Cyber Color</summary>
+      <description>Chrollo purple accent color for brackets and split highlights.</description>
+    </key>
+
+    <key name="alert-color" type="s">
+      <default>'#ef4444'</default>
+      <summary>Alert Crimson Color</summary>
+      <description>Crimson alert accent for active node lock and hex warnings.</description>
+    </key>
+
+  </schema>
+</schemalist>

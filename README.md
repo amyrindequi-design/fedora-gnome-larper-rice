@@ -1,9 +1,9 @@
 # 🕷️ Fedora GNOME Larper Rice — Gen'ei Ryodan // No.0 (Chrollo Edition)
 
 Setup completo de customização (**Rice / Linux Larper**) para **Fedora Workstation (GNOME Wayland)** inspirado em **Hunter x Hunter (Chrollo Lucilfer / Trupe Fantasma)**, combinando:
-- **Cubo 3D na troca de áreas de trabalho** (`Desktop Cube`)
+- **Cubo 3D + Skybox 360° + Transição Hacker GLSL** (`Desktop Cube` + extensão custom `Hacker Workspace Transition` com glitch cromático, chuva Matrix, scanlines laser e HUD tático em Cairo ao trocar de área de trabalho)
 - **Janelas em Vidro Fosco (Blur + Transparência)** no Terminal (`Ptyxis`) e Gerenciador de Arquivos (`Nautilus`)
-- **Efeitos de desintegração Matrix / Glitch Cyberpunk** ao abrir/fechar janelas (`Burn My Windows`) + **Janelas Elásticas** (`Compiz Wobbly Windows`)
+- **Efeitos Hacker de Janela (`Burn My Windows`)**: aleatorizando `Glitch` (`#00ff88`), `Matrix`, `TV Glitch` (`#a855f7`) e `Hexagon` ao abrir/fechar janelas + **Janelas Elásticas** (`Compiz Wobbly Windows`)
 - **Fastfetch Customizado** com a Aranha de 12 patas + Cruz Invertida (`GEN'EI RYODAN // NO.0`) e HUD de telemetria (`[SKILL HUNTER // SYS.HUD]`)
 - **Prompt Starship** de 2 linhas em roxo/carmesim com ícones **JetBrainsMono Nerd Font**
 - **Skill Hunter Deck (`larper`)**: Painel multiplexado em 4 quadrantes no `tmux` rodando `fastfetch`, `btop`, `matrix --purple` e `pipes` simultaneamente com consumo quase zero de RAM (~24 MB).
@@ -89,23 +89,30 @@ dconf load /org/gnome/Ptyxis/ < gnome/ptyxis.dconf
 
 ---
 
-### 3. Ativar o Cubo 3D e Efeitos de Janela no GNOME
+### 3. Ativar o Cubo 3D, Transição Hacker GLSL e Efeitos de Janela no GNOME
 Instale pelo **Extension Manager** (ou pelo site [extensions.gnome.org](https://extensions.gnome.org)) as extensões:
-- **Desktop Cube** (`desktop-cube@schneegans.github.com`) — Troca de área de trabalho em cubo 3D com parallax.
-- **Burn My Windows** (`burn-my-windows@schneegans.github.com`) — Desintegra janelas com efeito Matrix, TV Glitch e Energize.
+- **Desktop Cube** (`desktop-cube@schneegans.github.com`) — Troca de área de trabalho em cubo 3D com parallax e skybox panorâmico 360°.
+- **Burn My Windows** (`burn-my-windows@schneegans.github.com`) — Desintegra janelas com efeitos `Glitch`, `Matrix`, `TV Glitch` e `Hexagon` em `#00ff88` e `#a855f7`.
+- **Hacker Workspace Transition** (`gnome/extensions/hacker-transition@amyrindequi.github.io`) — Extensão custom GNOME 45–51 incluída neste repo: aplica shader GLSL (`HackerGlitchShader`) + HUD tático Cairo (`SYS://CUBE_BUS NODE_0X >> NODE_0Y`) nas transições de área de trabalho junto com o Cubo 3D.
 - **Compiz windows effect** (`compiz-windows-effect@hermes83.github.com`) — Janelas elásticas/gelatinosas ao arrastar.
 - **Dash to Dock** (`dash-to-dock@micxgx.gmail.com`) + **Transparent Top Bar** (`transparent-top-bar@ftpix.com`) + **O-Tiling** (`o-tiling@oliwebd.github.com`).
 
-Aplique os ajustes finos do Cubo 3D e do Burn My Windows:
+Aplique os ajustes finos do Cubo 3D, Skybox, Burn My Windows e instale a extensão local:
 ```bash
 # Fixar 4 áreas de trabalho para formar as 4 faces do cubo 3D
 gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 
-# Carregar configurações 3D (parallax 0.85, separação 100px, explosão 3D ativa)
+# Carregar configurações 3D (parallax, separação, explosão 3D e skybox 360°)
 dconf load /org/gnome/shell/extensions/desktop-cube/ < gnome/desktop-cube.dconf
+dconf write /org/gnome/shell/extensions/desktop-cube/background-panorama "'$HOME/Imagens/Wallpapers-Linux/cube-skybox-geneiryodan.png'"
 
-# Copiar perfil Matrix + TV Glitch + Energize para o Burn My Windows
+# Instalar extensão custom Hacker Workspace Transition
+mkdir -p ~/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io
+cp -r gnome/extensions/hacker-transition@amyrindequi.github.io/* ~/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io/
+glib-compile-schemas ~/.local/share/gnome-shell/extensions/hacker-transition@amyrindequi.github.io/schemas/
+
+# Copiar perfil Glitch + Matrix + TV Glitch + Hexagon para o Burn My Windows
 mkdir -p ~/.config/burn-my-windows/profiles
 cp configs/burn-my-windows/profiles/chrollo-larper.conf ~/.config/burn-my-windows/profiles/1700000000.conf
 dconf write /org/gnome/shell/extensions/burn-my-windows/active-profile "'$HOME/.config/burn-my-windows/profiles/1700000000.conf'"
@@ -160,24 +167,28 @@ chmod +x ~/.local/bin/larper ~/.local/bin/matrix ~/.local/bin/pipes
 │   ├── .tmux.conf                                 # Barra superior GEN'EI RYODAN + suporte a mouse
 │   ├── starship.toml                              # Prompt futurista de 2 linhas em roxo/carmesim
 │   ├── btop/btop.conf                             # Configuração transparente em Braille do btop
-│   ├── burn-my-windows/profiles/chrollo-larper.conf # Efeitos Matrix + TV Glitch + Energize
+│   ├── burn-my-windows/profiles/chrollo-larper.conf # Efeitos Glitch + Matrix + TV Glitch + Hexagon
 │   └── fastfetch/
 │       ├── config.jsonc                           # Layout [SKILL HUNTER // SYS.HUD]
 │       └── logo.txt                               # Arte ASCII Aranha Nº 0 + Cruz Invertida
 ├── gnome/
+│   ├── extensions/
+│   │   └── hacker-transition@amyrindequi.github.io/ # Extensão custom GLSL + HUD tático Cairo
 │   ├── blur-my-shell.dconf                        # Blur no Nautilus, Ptyxis, Dock e Painel
-│   ├── desktop-cube.dconf                         # Parallax 3D e separação de faces do Cubo
+│   ├── desktop-cube.dconf                         # Parallax 3D, Skybox e separação de faces do Cubo
 │   ├── burn-my-windows.dconf                      # Perfil ativo de efeitos de janela
 │   ├── dash-to-dock.dconf                         # Configurações da dock
 │   ├── o-tiling.dconf                             # Tiling de janelas
 │   ├── ptyxis.dconf                               # Fonte Nerd Font + opacidade 84% no terminal
 │   └── enabled-extensions.txt                     # Lista de extensões GNOME utilizadas
 ├── scripts/
+│   ├── gerar-skybox.py                            # Gerador do Skybox 360° Gen'ei Ryodan
 │   ├── larper                                     # Launcher do painel 4-em-1 no tmux
 │   ├── matrix                                     # Chuva Matrix em Katakana (verde/roxo/vermelho)
 │   └── pipes                                      # Animação de tubulações neon no terminal
 ├── wallpapers/
 │   ├── chrollo-hunter-x-hunter.jpg                # Wallpaper principal Chrollo Lucilfer
+│   ├── cube-skybox-geneiryodan.png                # Skybox 360° do Cubo 3D (Gen'ei Ryodan)
 │   ├── evangelion-nerv-magi-hud.png               # Wallpaper custom Evangelion NERV / MAGI
 │   └── linux-kernel-cyber-hud.png                 # Wallpaper custom Linux Kernel Cyber HUD
 └── install.sh                                     # Instalador automático em 1 comando

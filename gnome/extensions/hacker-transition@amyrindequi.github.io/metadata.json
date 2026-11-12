@@ -1,0 +1,17 @@
+{
+  "uuid": "hacker-transition@amyrindequi.github.io",
+  "name": "Hacker Workspace Transition",
+  "description": "GLSL cyber-glitch, chromatic aberration, matrix data-stream shader and tactical hacker HUD overlay during workspace transitions (built to stack cleanly with Desktop Cube).",
+  "shell-version": [
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51"
+  ],
+  "settings-schema": "org.gnome.shell.extensions.hacker-transition",
+  "url": "https://github.com/amyrindequi-design/fedora-gnome-larper-rice",
+  "version": 1
+}
