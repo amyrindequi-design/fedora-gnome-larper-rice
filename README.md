@@ -21,22 +21,23 @@ Setup completo de customização (**Rice / Linux Larper**) para **Fedora Worksta
 ## 🖥️ Preview do Terminal (`fastfetch`)
 
 ```text
-                                        ╭─── 󰣛 user@fedora ─── [SKILL HUNTER // SYS.HUD] ───╮
-       ▄▀                       ▀▄      │ 󰣛 Distro   ❯ Fedora Linux Workstation Edition
-     █   ▄▀       ▄▀ ▀▄       ▀▄   █    │ 󰌽 Kernel   ❯ Linux 7.x x86_64
-    █   █   ▄▀   ▄█████▄   ▀▄   █   █   │ 󱂬 WM/Comp  ❯ Mutter (Wayland)
-    █  █   █  ▀▄███▀█▀███▄▀  █   █  █   │ 󰆍 Shell    ❯ bash
-     █  █   ▀▄  ▀███████▀  ▄▀   █  █    │  Term     ❯ Ptyxis
-      ▀  █  ▄▀▀▀▄███████▄▀▀▀▄  █  ▀     │ 󰏖 Pkgs     ❯ rpm + flatpak
-        ▄▀ █   ████▄█▄████   █ ▀▄       │ 󰅐 Uptime   ❯ 1 day, 32 mins
-       █  █   █████▀█▀█████   █  █      ├────────────── [ TELEMETRY // HARDWARE ] ──────────────┤
-       █  █  ███████▀███████  █  █      │ 󰻠 CPU      ❯ Intel Core (6T) @ 3.30 GHz
-       █  █  ███████▄███████  █  █      │ 󰢮 GPU      ❯ Intel UHD Graphics
-       █  ▀▄  █████▀█▀█████  ▄▀  █      │ 󰍛 Memory   ❯ [ █████░░░░░░░░░ ] 3.75 GiB / 11.36 GiB (33%)
-       ▀▄  ▀▄  ███████████  ▄▀  ▄▀      │ 󰋊 Disk     ❯ [ █░░░░░░░░░░░░░ ] 20.66 GiB / 474.35 GiB (4%)
-        ▀▄  █   ▀███████▀   █  ▄▀       │ 󰁹 Battery  ❯ [ ████████░░░░░░ ] (80%)
-          ▀▄▀▄    ▀▀█▀▀    ▄▀▄▀         ╰───────────────────────────────────────────────────────╯
-              ▀▄         ▄▀               ● ● ● ● ● ● ● ●
+                                           ╭─── 󰣛 user@fedora ─── [SKILL HUNTER // SYS.HUD] ───╮
+        ⢄      ⢀⡄        ⢠⡀      ⡠         │ 󰣛 Distro   ❯ Fedora Linux Workstation Edition
+        ⠘⡆    ⣴⡏          ⢹⣦    ⢰⠃         │ 󰌽 Kernel   ❯ Linux 7.x x86_64
+         ⢼⣦⡀  ⠹⣿⡄        ⢠⣿⠏  ⢀⣴⡧          │ 󱂬 WM/Comp  ❯ Mutter (Wayland)
+   ⠙⢦⡀    ⠙⠻⣶⣄ ⠹⣿⡄⢠⡞⠁⠈⢳⡄⢠⣿⠏ ⣠⣶⠟⠋    ⢀⡴⠋    │ 󰆍 Shell    ❯ bash
+     ⠙⠢⣄⣀   ⠈⠻⢷⣤⡙⣿⡄⢇⢀⡀⡸⢠⣿⢋⣤⡾⠟⠁   ⣀⣠⠔⠋      │  Term     ❯ Ptyxis
+       ⠙⠛⠿⢷⣶⣦⣤⣀⡙⢿⣾⣿⣿⣿⣿⣿⣿⣷⡿⢋⣀⣤⣴⣶⡿⠿⠛⠋        │ 󰏖 Pkgs     ❯ rpm + flatpak
+   ⢤⡀       ⠉⠙⠛⠿⢿⡮⠽⣿⣿⣿⣿⠯⢵⡿⠿⠛⠋⠉       ⢀⡤    │ 󰅐 Uptime   ❯ 1 day, 32 mins
+    ⠉⠢⣄⣀⣀⣀⣤⣤⣤⣶⣶⣶⢿⡗ ⢰⣿⣿⡆ ⢺⡿⣶⣶⣶⣤⣤⣤⣀⣀⣀⣠⠔⠉     ├────────────── [ TELEMETRY // HARDWARE ] ──────────────┤
+      ⠈⠟⠛⠛⠋⠉⠉⣀⣴⣾⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣷⣦⣀⠉⠉⠙⠛⠛⠻⠁       │ 󰻠 CPU      ❯ Intel Core (6T) @ 3.30 GHz
+         ⢀⣤⣶⡿⠟⠉⣠⣾⣿⣿⣿⡿⢿⣿⣿⣿⣷⣄⠉⠻⢿⣶⣤⡀          │ 󰢮 GPU      ❯ Intel UHD Graphics
+       ⢴⣾⠟⠋⠁ ⢀⣼⣿⣿⣿⣿⣿  ⣿⣿⣿⣿⣿⣧⡀ ⠈⠙⠻⣷⡦        │ 󰍛 Memory   ❯ [ █████░░░░░░░░░ ] 3.75 GiB / 11.36 GiB (33%)
+       ⡏    ⣠⣿⠋ ⣿⣿⣿⣿⣦⣴⣿⣿⣿⣿ ⠙⣿⣄    ⢹        │ 󰋊 Disk     ❯ [ █░░░░░░░░░░░░░ ] 20.66 GiB / 474.35 GiB (4%)
+      ⢸⠁   ⢾⠟⠁  ⠈⢿⣿⣿⣿⣿⣿⣿⡿⠁  ⠈⠻⡷   ⠈⡇       │ 󰁹 Battery  ❯ [ ████████░░░░░░ ] (80%)
+      ⠁    ⠉⢧     ⠈⠙⠛⠛⠋⠁     ⡼⠉    ⠈       ╰───────────────────────────────────────────────────────╯
+            ⠈⢧              ⡼⠁               ● ● ● ● ● ● ● ●
+             ⠈⠇            ⠸⠁
        ── GEN'EI RYODAN // NO.0 ──
 ```
 
