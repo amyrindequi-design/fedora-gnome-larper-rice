@@ -223,7 +223,7 @@ apply_gnome_settings() {
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || true
     gsettings set org.gnome.desktop.interface accent-color 'yellow' || true
     gsettings set org.gnome.desktop.interface clock-show-date false
-    gsettings set org.gnome.desktop.interface clock-show-weekday false
+    gsettings set org.gnome.desktop.interface clock-show-weekday true
     gsettings set org.gnome.desktop.interface clock-show-seconds false
     gsettings set org.gnome.desktop.interface show-battery-percentage true
     gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrains Mono 10'
