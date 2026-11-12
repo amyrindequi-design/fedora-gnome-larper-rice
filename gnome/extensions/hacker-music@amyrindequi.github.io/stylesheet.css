@@ -1,153 +1,171 @@
 .hacker-music-pill {
-    background-color: rgba(10, 6, 18, 0.72);
-    border: 1px solid rgba(168, 85, 247, 0.55);
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(255, 255, 255, 0.14);
+    background-gradient-end: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.20);
     border-radius: 999px;
     padding: 2px 10px;
-    margin: 3px 4px;
+    margin: 2px 4px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.16);
     transition-duration: 180ms;
 }
 
+.hacker-music-pill:hover {
+    border-color: rgba(255, 255, 255, 0.32);
+}
+
 .hacker-music-pill-playing {
-    border-color: rgba(0, 255, 136, 0.72);
-    background-color: rgba(12, 8, 22, 0.84);
+    background-gradient-start: rgba(255, 255, 255, 0.20);
+    background-gradient-end: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.28);
 }
 
 .hacker-music-pill-idle {
-    border-color: rgba(148, 163, 184, 0.35);
-    background-color: rgba(10, 6, 18, 0.55);
+    background-gradient-start: rgba(255, 255, 255, 0.08);
+    background-gradient-end: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
 .hacker-music-label {
-    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
-    font-size: 11px;
-    font-weight: 600;
-    color: #f8fafc;
-    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.94);
+    margin-left: 7px;
     margin-right: 6px;
 }
 
 .hacker-music-label-idle {
-    color: #a855f7;
-    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.60);
+    font-weight: 400;
+    margin-right: 2px;
 }
 
 .hacker-music-btn {
-    padding: 1px 5px;
-    border-radius: 6px;
-    color: #cbd5e1;
-    font-size: 12px;
-    font-weight: 700;
+    padding: 2px 4px;
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.78);
 }
 
 .hacker-music-btn:hover {
-    color: #00ff88;
-    background-color: rgba(0, 255, 136, 0.14);
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.16);
 }
 
 .hacker-music-btn-play {
-    color: #a855f7;
+    color: rgba(255, 255, 255, 0.96);
 }
 
-.hacker-music-btn-play:hover {
-    color: #00ff88;
+.hacker-music-menu.popup-menu-boxpointer {
+    -arrow-background-color: rgba(22, 24, 30, 0.76);
+    -arrow-border-color: rgba(255, 255, 255, 0.22);
+    -arrow-border-width: 1px;
+    -arrow-border-radius: 20px;
+    -boxpointer-gap: 6px;
+}
+
+.hacker-music-menu-item {
+    padding: 0;
+    margin: 0;
 }
 
 .hacker-music-card {
-    background-color: rgba(10, 6, 18, 0.94);
-    border: 1px solid rgba(168, 85, 247, 0.55);
-    border-radius: 14px;
-    padding: 14px;
-    min-width: 320px;
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(255, 255, 255, 0.09);
+    background-gradient-end: rgba(255, 255, 255, 0.01);
+    border-radius: 16px;
+    padding: 14px 16px;
+    min-width: 310px;
 }
 
 .hacker-music-card-header {
-    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
-    font-size: 10px;
-    font-weight: 700;
-    color: #00ff88;
-    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.58);
+    margin-bottom: 10px;
 }
 
 .hacker-music-source-btn {
-    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
-    font-size: 10px;
-    font-weight: 700;
-    color: #d8b4fe;
-    background-color: rgba(168, 85, 247, 0.18);
-    border: 1px solid rgba(168, 85, 247, 0.45);
-    border-radius: 6px;
-    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.90);
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin-bottom: 10px;
 }
 
 .hacker-music-source-btn:hover {
-    background-color: rgba(168, 85, 247, 0.35);
+    background-color: rgba(255, 255, 255, 0.22);
     color: #ffffff;
 }
 
 .hacker-music-art-box {
-    background-color: rgba(24, 16, 40, 0.9);
-    border: 1px solid rgba(168, 85, 247, 0.45);
-    border-radius: 10px;
-    width: 72px;
-    height: 72px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    width: 68px;
+    height: 68px;
+    color: rgba(255, 255, 255, 0.72);
 }
 
 .hacker-music-title {
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 700;
-    color: #f8fafc;
+    color: rgba(255, 255, 255, 0.96);
 }
 
 .hacker-music-artist {
-    font-size: 11.5px;
-    font-weight: 600;
-    color: #a855f7;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.74);
+    margin-top: 2px;
 }
 
 .hacker-music-album {
-    font-size: 10.5px;
-    color: #94a3b8;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.50);
+    margin-top: 1px;
 }
 
 .hacker-music-time {
-    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
-    font-size: 10px;
-    color: #94a3b8;
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.56);
 }
 
 .hacker-music-progress-track {
-    background-color: rgba(148, 163, 184, 0.22);
+    background-color: rgba(255, 255, 255, 0.16);
     border-radius: 999px;
-    height: 5px;
+    height: 4px;
     margin-top: 6px;
     margin-bottom: 6px;
 }
 
 .hacker-music-progress-fill {
-    background-color: #00ff88;
+    background-color: rgba(255, 255, 255, 0.88);
     border-radius: 999px;
-    height: 5px;
+    height: 4px;
 }
 
 .hacker-music-ctrl-btn {
-    background-color: rgba(30, 20, 48, 0.85);
-    border: 1px solid rgba(168, 85, 247, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 999px;
-    padding: 6px 14px;
-    color: #e2e8f0;
-    font-size: 13px;
-    font-weight: 700;
+    padding: 8px 14px;
+    color: rgba(255, 255, 255, 0.88);
 }
 
 .hacker-music-ctrl-btn:hover {
-    background-color: rgba(168, 85, 247, 0.32);
-    border-color: #00ff88;
-    color: #00ff88;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.30);
+    color: #ffffff;
 }
 
 .hacker-music-ctrl-btn-main {
-    background-color: rgba(0, 255, 136, 0.16);
-    border-color: rgba(0, 255, 136, 0.72);
-    color: #00ff88;
-    padding: 6px 18px;
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(255, 255, 255, 0.24);
+    background-gradient-end: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.32);
+    color: #ffffff;
+    padding: 8px 20px;
 }

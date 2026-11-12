@@ -1,7 +1,7 @@
 {
   "uuid": "hacker-music@amyrindequi.github.io",
-  "name": "Hacker Music HUD",
-  "description": "Sleek cyberpunk MPRIS music controller with animated neon equalizer, inline top-bar transport controls, and album art card.",
+  "name": "Liquid Glass Music HUD",
+  "description": "Sober liquid-glass MPRIS media pill for GNOME top bar with subtle Cairo waveform, symbolic transport controls, and frosted album card.",
   "version": 1,
   "shell-version": [
     "45",

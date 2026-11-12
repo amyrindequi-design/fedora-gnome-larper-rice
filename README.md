@@ -2,7 +2,7 @@
 
 Setup completo de customização (**Rice / Linux Larper**) para **Fedora Workstation (GNOME Wayland)** inspirado em **Hunter x Hunter (Chrollo Lucilfer / Trupe Fantasma)**, combinando:
 - **Cubo 3D + Skybox 360° + Transição Hacker GLSL** (`Desktop Cube` + extensão custom `Hacker Workspace Transition` com glitch cromático, chuva Matrix, scanlines laser e HUD tático em Cairo ao trocar de área de trabalho)
-- **Hacker Music HUD na Barra Superior** (extensão custom GNOME 45–51 `Hacker Music HUD` com equalizador Cairo animado, controles rápidos inline `‹ ▶/❚❚ ›`, capa do álbum via MPRIS/Soup e barra de progresso em tempo real)
+- **Liquid Glass Music HUD na Barra Superior** (extensão custom GNOME 45–51 `hacker-music@amyrindequi.github.io` com visual Liquid Glass translúcido, waveform sutil em Cairo, ícones simbólicos nativos, capa do álbum via MPRIS/Soup e card fosco com barra de progresso)
 - **Janelas em Vidro Fosco (Blur + Transparência)** no Terminal (`Ptyxis`) e Gerenciador de Arquivos (`Nautilus`)
 - **Efeitos Hacker de Janela (`Burn My Windows`)**: aleatorizando `Glitch` (`#00ff88`), `Matrix`, `TV Glitch` (`#a855f7`) e `Hexagon` ao abrir/fechar janelas + **Janelas Elásticas** (`Compiz Wobbly Windows`)
 - **Fastfetch Customizado** com a Aranha de 12 patas + Cruz Invertida (`GEN'EI RYODAN // NO.0`) e HUD de telemetria (`[SKILL HUNTER // SYS.HUD]`)
@@ -57,7 +57,7 @@ O instalador faz tudo sozinho (e ainda cria backup dos seus dotfiles antigos em 
 - Instala `fastfetch`, `starship`, `btop`, `yazi` e a **JetBrainsMono Nerd Font**.
 - Copia os scripts (`larper`, `matrix`, `pipes`, `gerar-skybox.py`) e todas as configs do terminal/tmux.
 - Aplica os wallpapers (incluindo o **Skybox 360°**), tema escuro, fonte, botões de janela, **Ptyxis transparente**, **Blur my Shell**, **Desktop Cube**, **Burn My Windows** (`Glitch` + `Matrix` + `TV Glitch` + `Hexagon`) e **O-Tiling**.
-- Baixa/ativa todas as extensões do GNOME + instala e compila as extensões custom **`hacker-transition@amyrindequi.github.io`** (shader GLSL + HUD tático Cairo) e **`hacker-music@amyrindequi.github.io`** (widget de música MPRIS com equalizador neon na barra superior).
+- Baixa/ativa todas as extensões do GNOME + instala e compila as extensões custom **`hacker-transition@amyrindequi.github.io`** (shader GLSL + HUD tático Cairo) e **`hacker-music@amyrindequi.github.io`** (widget de música MPRIS sóbrio em Liquid Glass na barra superior).
 
 Depois que terminar:
 1. Abra um novo terminal para ver o **Fastfetch + Starship** e digite `larper` para abrir o **Skill Hunter Deck**.
@@ -102,7 +102,7 @@ Instale pelo **Extension Manager** (ou pelo site [extensions.gnome.org](https://
 - **Desktop Cube** (`desktop-cube@schneegans.github.com`) — Troca de área de trabalho em cubo 3D com parallax e skybox panorâmico 360°.
 - **Burn My Windows** (`burn-my-windows@schneegans.github.com`) — Desintegra janelas com efeitos `Glitch`, `Matrix`, `TV Glitch` e `Hexagon` em `#00ff88` e `#a855f7`.
 - **Hacker Workspace Transition** (`gnome/extensions/hacker-transition@amyrindequi.github.io`) — Extensão custom GNOME 45–51 incluída neste repo: aplica shader GLSL (`HackerGlitchShader`) + HUD tático Cairo (`SYS://CUBE_BUS NODE_0X >> NODE_0Y`) nas transições de área de trabalho junto com o Cubo 3D.
-- **Hacker Music HUD** (`gnome/extensions/hacker-music@amyrindequi.github.io`) — Extensão custom GNOME 45–51 incluída neste repo: widget de música MPRIS na barra superior com espectro Cairo neon, controles rápidos (`‹ ▶/❚❚ ›`) e card popup com capa do álbum e troca de player.
+- **Liquid Glass Music HUD** (`gnome/extensions/hacker-music@amyrindequi.github.io`) — Extensão custom GNOME 45–51 incluída neste repo: cápsula MPRIS translúcida em Liquid Glass na barra superior com waveform Cairo sutil, ícones simbólicos nativos e card fosco com capa do álbum e troca de player.
 - **Compiz windows effect** (`compiz-windows-effect@hermes83.github.com`) — Janelas elásticas/gelatinosas ao arrastar.
 - **Dash to Dock** (`dash-to-dock@micxgx.gmail.com`) + **Transparent Top Bar** (`transparent-top-bar@ftpix.com`) + **O-Tiling** (`o-tiling@oliwebd.github.com`).
 
@@ -184,7 +184,7 @@ chmod +x ~/.local/bin/larper ~/.local/bin/matrix ~/.local/bin/pipes
 │       └── logo.txt                               # Arte ASCII Aranha Nº 0 + Cruz Invertida
 ├── gnome/
 │   ├── extensions/
-│   │   ├── hacker-music@amyrindequi.github.io/      # Widget de música MPRIS com equalizador neon
+│   │   ├── hacker-music@amyrindequi.github.io/      # Widget de música MPRIS em Liquid Glass
 │   │   └── hacker-transition@amyrindequi.github.io/ # Extensão custom GLSL + HUD tático Cairo
 │   ├── blur-my-shell.dconf                        # Blur no Nautilus, Ptyxis, Dock e Painel
 │   ├── desktop-cube.dconf                         # Parallax 3D, Skybox e separação de faces do Cubo

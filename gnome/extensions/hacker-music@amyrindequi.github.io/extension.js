@@ -63,14 +63,14 @@ function hashString(str) {
 }
 
 /**
- * Animated 6-bar Cairo spectrum indicator rendered inside the top bar pill.
+ * Animated 5-bar Cairo equalizer rendered inside the top bar glass pill.
  */
 const SpectrumBars = GObject.registerClass(
 class SpectrumBars extends St.DrawingArea {
     _init() {
         super._init({
-            width: 26,
-            height: 15,
+            width: 20,
+            height: 14,
             y_align: Clutter.ActorAlign.CENTER,
         });
         this._playing = false;
@@ -87,8 +87,8 @@ class SpectrumBars extends St.DrawingArea {
         this._playing = playing;
 
         if (playing && !this._timerId) {
-            this._timerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 45, () => {
-                this._phase += 0.24;
+            this._timerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => {
+                this._phase += 0.22;
                 this.queue_repaint();
                 return GLib.SOURCE_CONTINUE;
             });
@@ -115,38 +115,35 @@ class SpectrumBars extends St.DrawingArea {
             cr.setOperator(Cairo.Operator.OVER);
 
             const [w, h] = this.get_surface_size();
-            const bars = 6;
-            const barW = 2.6;
-            const gap = 1.6;
+            const bars = 5;
+            const barW = 2.2;
+            const gap = 1.8;
             const totalW = bars * barW + (bars - 1) * gap;
             const x0 = Math.max(0, (w - totalW) * 0.5);
+            const r = barW * 0.5;
 
             for (let i = 0; i < bars; i++) {
                 let frac;
                 if (!this._hasPlayer) {
-                    frac = 0.22 + (i % 2) * 0.14;
+                    frac = 0.28 + (i % 2) * 0.16;
                 } else if (!this._playing) {
-                    frac = 0.35 + ((i * 3) % 4) * 0.08;
+                    frac = 0.34 + ((i * 2) % 3) * 0.14;
                 } else {
-                    const wave1 = Math.sin(this._phase * 1.4 + i * 0.95);
-                    const wave2 = Math.cos(this._phase * 2.1 - i * 1.35);
-                    frac = 0.28 + Math.abs(wave1 * 0.45 + wave2 * 0.35);
+                    const wave1 = Math.sin(this._phase * 1.35 + i * 0.95);
+                    const wave2 = Math.cos(this._phase * 2.0 - i * 1.3);
+                    frac = 0.26 + Math.abs(wave1 * 0.44 + wave2 * 0.34);
                 }
 
-                const barH = Math.max(3, Math.min(h - 1, (h - 1) * frac));
+                const barH = Math.max(barW + 1, Math.min(h - 1, (h - 1) * frac));
                 const bx = x0 + i * (barW + gap);
                 const by = (h - barH) * 0.5;
+                const alpha = !this._hasPlayer ? 0.42 : (this._playing ? 0.92 : 0.62);
 
-                if (!this._hasPlayer) {
-                    cr.setSourceRGBA(0.66, 0.33, 0.97, 0.6);
-                } else if (!this._playing) {
-                    cr.setSourceRGBA(0.66, 0.33, 0.97, 0.85);
-                } else if (i % 2 === 0) {
-                    cr.setSourceRGBA(0.0, 1.0, 0.53, 0.95);
-                } else {
-                    cr.setSourceRGBA(0.66, 0.33, 0.97, 0.95);
-                }
-                cr.rectangle(bx, by, barW, barH);
+                cr.setSourceRGBA(1.0, 1.0, 1.0, alpha);
+                cr.newSubPath();
+                cr.arc(bx + r, by + r, r, Math.PI, 0);
+                cr.arc(bx + r, by + barH - r, r, 0, Math.PI);
+                cr.closePath();
                 cr.fill();
             }
         } finally {
@@ -370,7 +367,7 @@ class HackerMusicIndicator extends PanelMenu.Button {
         this._pill.add_child(this._spectrum);
 
         this._topLabel = new St.Label({
-            text: 'AUDIO // IDLE',
+            text: 'Sem mídia',
             style_class: 'hacker-music-label hacker-music-label-idle',
             y_align: Clutter.ActorAlign.CENTER,
         });
@@ -380,9 +377,24 @@ class HackerMusicIndicator extends PanelMenu.Button {
         this._controlsBox = new St.BoxLayout({
             y_align: Clutter.ActorAlign.CENTER,
         });
-        this._prevBtn = this._makeInlineBtn('‹', () => this._getActiveClient()?.previous());
-        this._playBtn = this._makeInlineBtn('▶', () => this._getActiveClient()?.playPause(), 'hacker-music-btn hacker-music-btn-play');
-        this._nextBtn = this._makeInlineBtn('›', () => this._getActiveClient()?.next());
+        this._prevBtn = this._makeIconBtn(
+            'media-skip-backward-symbolic',
+            13,
+            () => this._getActiveClient()?.previous(),
+            'hacker-music-btn'
+        );
+        this._playBtn = this._makeIconBtn(
+            'media-playback-start-symbolic',
+            13,
+            () => this._getActiveClient()?.playPause(),
+            'hacker-music-btn hacker-music-btn-play'
+        );
+        this._nextBtn = this._makeIconBtn(
+            'media-skip-forward-symbolic',
+            13,
+            () => this._getActiveClient()?.next(),
+            'hacker-music-btn'
+        );
 
         this._controlsBox.add_child(this._prevBtn);
         this._controlsBox.add_child(this._playBtn);
@@ -392,14 +404,20 @@ class HackerMusicIndicator extends PanelMenu.Button {
         this.add_child(this._pill);
     }
 
-    _makeInlineBtn(label, onClick, styleClass = 'hacker-music-btn') {
+    _makeIconBtn(iconName, iconSize, onClick, styleClass, extraStyle = '') {
+        const icon = new St.Icon({
+            icon_name: iconName,
+            icon_size: iconSize,
+        });
         const btn = new St.Button({
-            label,
+            child: icon,
             style_class: styleClass,
+            style: extraStyle,
             reactive: true,
             can_focus: true,
             y_align: Clutter.ActorAlign.CENTER,
         });
+        btn._icon = icon;
         btn.connect('clicked', () => {
             onClick();
             return Clutter.EVENT_STOP;
@@ -415,9 +433,12 @@ class HackerMusicIndicator extends PanelMenu.Button {
     }
 
     _buildPopupCard() {
+        this.menu.actor.add_style_class_name('hacker-music-menu');
+
         const item = new PopupMenu.PopupBaseMenuItem({
             reactive: false,
             can_focus: false,
+            style_class: 'hacker-music-menu-item',
         });
         item.setOrnament(PopupMenu.Ornament.NONE);
 
@@ -429,12 +450,13 @@ class HackerMusicIndicator extends PanelMenu.Button {
         // Header row: status tag + clickable player switch/focus badge
         const headerRow = new St.BoxLayout({x_expand: true});
         this._cardHeader = new St.Label({
-            text: '[ MPRIS // STREAM ]',
+            text: 'Em espera',
             style_class: 'hacker-music-card-header',
             x_expand: true,
+            y_align: Clutter.ActorAlign.CENTER,
         });
         this._sourceBtn = new St.Button({
-            label: 'NO_SOURCE',
+            label: 'Inativo',
             style_class: 'hacker-music-source-btn',
             reactive: true,
         });
@@ -456,7 +478,7 @@ class HackerMusicIndicator extends PanelMenu.Button {
         const bodyRow = new St.BoxLayout({x_expand: true});
         this._artIcon = new St.Icon({
             icon_name: 'audio-x-generic-symbolic',
-            icon_size: 48,
+            icon_size: 32,
         });
         const artBox = new St.Bin({
             style_class: 'hacker-music-art-box',
@@ -472,7 +494,7 @@ class HackerMusicIndicator extends PanelMenu.Button {
             style: 'margin-left: 12px;',
         });
         this._titleLabel = new St.Label({
-            text: 'Nenhum player ativo',
+            text: 'Nenhuma mídia em reprodução',
             style_class: 'hacker-music-title',
         });
         this._titleLabel.clutter_text.ellipsize = Pango.EllipsizeMode.END;
@@ -496,18 +518,18 @@ class HackerMusicIndicator extends PanelMenu.Button {
         // Progress bar + time row
         const trackWrap = new St.BoxLayout({
             orientation: Clutter.Orientation.VERTICAL,
-            style: 'margin-top: 10px;',
+            style: 'margin-top: 12px;',
         });
         this._progressTrack = new St.Widget({
             style_class: 'hacker-music-progress-track',
             x_expand: true,
-            height: 5,
+            height: 4,
             layout_manager: new Clutter.BinLayout(),
         });
         this._progressFill = new St.Widget({
             style_class: 'hacker-music-progress-fill',
             width: 0,
-            height: 5,
+            height: 4,
             x_align: Clutter.ActorAlign.START,
             y_expand: true,
         });
@@ -522,30 +544,31 @@ class HackerMusicIndicator extends PanelMenu.Button {
         trackWrap.add_child(timeRow);
         card.add_child(trackWrap);
 
-        // Big tactile controls row
+        // Tactile glass controls row
         const ctrlRow = new St.BoxLayout({
             x_align: Clutter.ActorAlign.CENTER,
             style: 'margin-top: 10px;',
         });
-        this._cardPrev = new St.Button({
-            label: '‹ PREV',
-            style_class: 'hacker-music-ctrl-btn',
-            style: 'margin-right: 8px;',
-        });
-        this._cardPrev.connect('clicked', () => this._getActiveClient()?.previous());
-
-        this._cardPlay = new St.Button({
-            label: '▶ PLAY',
-            style_class: 'hacker-music-ctrl-btn hacker-music-ctrl-btn-main',
-            style: 'margin-right: 8px;',
-        });
-        this._cardPlay.connect('clicked', () => this._getActiveClient()?.playPause());
-
-        this._cardNext = new St.Button({
-            label: 'NEXT ›',
-            style_class: 'hacker-music-ctrl-btn',
-        });
-        this._cardNext.connect('clicked', () => this._getActiveClient()?.next());
+        this._cardPrev = this._makeIconBtn(
+            'media-skip-backward-symbolic',
+            16,
+            () => this._getActiveClient()?.previous(),
+            'hacker-music-ctrl-btn',
+            'margin-right: 10px;'
+        );
+        this._cardPlay = this._makeIconBtn(
+            'media-playback-start-symbolic',
+            18,
+            () => this._getActiveClient()?.playPause(),
+            'hacker-music-ctrl-btn hacker-music-ctrl-btn-main',
+            'margin-right: 10px;'
+        );
+        this._cardNext = this._makeIconBtn(
+            'media-skip-forward-symbolic',
+            16,
+            () => this._getActiveClient()?.next(),
+            'hacker-music-ctrl-btn'
+        );
 
         ctrlRow.add_child(this._cardPrev);
         ctrlRow.add_child(this._cardPlay);
@@ -645,16 +668,16 @@ class HackerMusicIndicator extends PanelMenu.Button {
             this.visible = showIdle;
             this._pill.style_class = 'hacker-music-pill hacker-music-pill-idle';
             this._topLabel.style_class = 'hacker-music-label hacker-music-label-idle';
-            this._topLabel.text = 'AUDIO // IDLE';
+            this._topLabel.text = 'Sem mídia';
             this._controlsBox.visible = false;
             this._spectrum.setState(false, false);
 
-            this._cardHeader.text = '[ MPRIS // STANDBY ]';
-            this._sourceBtn.label = 'IDLE';
-            this._titleLabel.text = 'Nenhum player ativo';
+            this._cardHeader.text = 'Em espera';
+            this._sourceBtn.label = 'Inativo';
+            this._titleLabel.text = 'Nenhuma mídia em reprodução';
             this._artistLabel.text = 'Toque algo no navegador ou Spotify';
             this._albumLabel.text = '';
-            this._cardPlay.label = '▶ PLAY';
+            this._cardPlay._icon.icon_name = 'media-playback-start-symbolic';
             this._updateAlbumArt('');
             this._updateProgressBar(0, 0);
             return;
@@ -662,6 +685,7 @@ class HackerMusicIndicator extends PanelMenu.Button {
 
         this.visible = true;
         const isPlaying = client.status === 'Playing';
+        const playIcon = isPlaying ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic';
         this._controlsBox.visible = true;
         this._spectrum.setState(true, isPlaying);
 
@@ -672,23 +696,22 @@ class HackerMusicIndicator extends PanelMenu.Button {
 
         const trackText = client.artist && client.title
             ? `${client.title} — ${client.artist}`
-            : (client.title || client.identity || 'MPRIS Stream');
+            : (client.title || client.identity || 'Mídia');
         this._topLabel.text = trackText;
-        this._playBtn.label = isPlaying ? '❚❚' : '▶';
-        this._prevBtn.opacity = client.canGoPrev ? 255 : 95;
-        this._nextBtn.opacity = client.canGoNext ? 255 : 95;
+        this._playBtn._icon.icon_name = playIcon;
+        this._prevBtn.opacity = client.canGoPrev ? 255 : 90;
+        this._nextBtn.opacity = client.canGoNext ? 255 : 90;
 
-        const stateTag = isPlaying ? 'STREAM_LIVE' : 'STREAM_PAUSED';
-        this._cardHeader.text = `[ MPRIS // ${stateTag} ]`;
-        const extraPlayers = this._clients.size > 1 ? ` (${this._clients.size})` : '';
-        this._sourceBtn.label = `${client.identity.toUpperCase()}${extraPlayers}`;
+        this._cardHeader.text = isPlaying ? 'Reproduzindo agora' : 'Pausado';
+        const extraPlayers = this._clients.size > 1 ? ` · ${this._clients.size}` : '';
+        this._sourceBtn.label = `${client.identity}${extraPlayers}`;
 
         this._titleLabel.text = client.title || 'Faixa desconhecida';
         this._artistLabel.text = client.artist || client.identity;
         this._albumLabel.text = client.album || '';
-        this._cardPlay.label = isPlaying ? '❚❚ PAUSE' : '▶ PLAY';
-        this._cardPrev.opacity = client.canGoPrev ? 255 : 95;
-        this._cardNext.opacity = client.canGoNext ? 255 : 95;
+        this._cardPlay._icon.icon_name = playIcon;
+        this._cardPrev.opacity = client.canGoPrev ? 255 : 90;
+        this._cardNext.opacity = client.canGoNext ? 255 : 90;
 
         this._updateAlbumArt(client.artUrl);
         this._updateProgressBar(client.positionUs, client.lengthUs);
@@ -697,9 +720,15 @@ class HackerMusicIndicator extends PanelMenu.Button {
     _updateProgressBar(posUs, lenUs) {
         this._posLabel.text = formatMicros(posUs);
         this._lenLabel.text = formatMicros(lenUs);
-        const trackW = Math.max(260, this._progressTrack.width || 292);
+        const trackW = Math.max(250, this._progressTrack.width || 278);
         const ratio = lenUs > 0 ? Math.min(1.0, Math.max(0.0, posUs / lenUs)) : 0.0;
         this._progressFill.width = Math.round(trackW * ratio);
+    }
+
+    _setArtFile(file) {
+        this._artIcon.icon_name = null;
+        this._artIcon.gicon = new Gio.FileIcon({file});
+        this._artIcon.icon_size = 68;
     }
 
     _updateAlbumArt(artUrl) {
@@ -715,15 +744,12 @@ class HackerMusicIndicator extends PanelMenu.Button {
         if (!artUrl) {
             this._artIcon.gicon = null;
             this._artIcon.icon_name = 'audio-x-generic-symbolic';
-            this._artIcon.icon_size = 44;
+            this._artIcon.icon_size = 32;
             return;
         }
 
         if (artUrl.startsWith('file://')) {
-            const file = Gio.File.new_for_uri(artUrl);
-            this._artIcon.icon_name = null;
-            this._artIcon.gicon = new Gio.FileIcon({file});
-            this._artIcon.icon_size = 72;
+            this._setArtFile(Gio.File.new_for_uri(artUrl));
             return;
         }
 
@@ -731,9 +757,7 @@ class HackerMusicIndicator extends PanelMenu.Button {
             const cachePath = `${GLib.get_tmp_dir()}/hacker-music-art-${hashString(artUrl)}`;
             const cacheFile = Gio.File.new_for_path(cachePath);
             if (cacheFile.query_exists(null)) {
-                this._artIcon.icon_name = null;
-                this._artIcon.gicon = new Gio.FileIcon({file: cacheFile});
-                this._artIcon.icon_size = 72;
+                this._setArtFile(cacheFile);
                 return;
             }
 
@@ -753,9 +777,7 @@ class HackerMusicIndicator extends PanelMenu.Button {
                         if (this._currentArtUrl !== artUrl || msg.status_code !== 200 || !bytes)
                             return;
                         GLib.file_set_contents(cachePath, bytes.toArray());
-                        this._artIcon.icon_name = null;
-                        this._artIcon.gicon = new Gio.FileIcon({file: Gio.File.new_for_path(cachePath)});
-                        this._artIcon.icon_size = 72;
+                        this._setArtFile(Gio.File.new_for_path(cachePath));
                     } catch (_e) {
                         // Keep fallback audio glyph when offline/cancelled.
                     }
