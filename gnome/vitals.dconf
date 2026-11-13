@@ -1,2 +1,2 @@
 [/]
-hot-sensors=@as []
+hot-sensors=['_memory_usage_', '_system_load_1m_', '__network-rx_max__']

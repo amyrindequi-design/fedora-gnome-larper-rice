@@ -194,7 +194,7 @@ chmod +x ~/.local/bin/larper ~/.local/bin/matrix ~/.local/bin/pipes
 │   ├── o-tiling.dconf                             # Tiling de janelas e atalhos
 │   ├── caffeine.dconf                             # Configurações do Caffeine
 │   ├── clipboard-indicator.dconf                  # Atalho <Super>v do histórico da área de transferência
-│   ├── vitals.dconf                               # Telemetria minimalista sem poluição na barra
+│   ├── vitals.dconf                               # Sensores de telemetria exibidos na barra (RAM, Load, Rede)
 │   ├── hacker-music.dconf                         # Ocultação automática quando inativo
 │   ├── ptyxis.dconf                               # Fonte Nerd Font + opacidade 84% no terminal
 │   └── enabled-extensions.txt                     # Lista de extensões GNOME utilizadas
