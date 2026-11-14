@@ -100,7 +100,7 @@ export default class CardTransitionExtension extends Extension {
                 if (!wsGroup)
                     continue;
 
-                // Higher-index workspaces stay above lower-index ones like stacked cards.
+                // Keep higher-index cards stacked above lower-index cards.
                 const parent = wsGroup.get_parent();
                 if (parent)
                     parent.set_child_above_sibling(wsGroup, null);
@@ -109,16 +109,21 @@ export default class CardTransitionExtension extends Extension {
                 const absD = clamp(Math.abs(delta), 0.0, 1.0);
 
                 if (delta < 0) {
-                    // Card underneath: stays in place while the top card slides over it.
-                    wsGroup.translation_x = absD * width * 0.85;
-                    const s = 1.0 - 0.08 * absD;
+                    // Card underneath: recedes in 3D depth with a subtle fan tilt.
+                    wsGroup.translation_x = absD * width * 0.72;
+                    wsGroup.translation_z = -90.0 * absD;
+                    const s = 1.0 - 0.10 * absD;
                     wsGroup.set_scale(s, s);
-                    wsGroup.opacity = Math.round(255 * (1.0 - 0.35 * absD));
+                    wsGroup.rotation_angle_y = -7.5 * absD;
+                    wsGroup.opacity = Math.round(255 * (1.0 - 0.40 * absD));
                 } else {
-                    // Top card: crisp, full-size card sliding cleanly over the card below.
-                    wsGroup.translation_x = 0;
-                    wsGroup.set_scale(1.0, 1.0);
-                    wsGroup.opacity = 255;
+                    // Incoming card: flips/glides cleanly over the deck.
+                    wsGroup.translation_x = -absD * width * 0.05;
+                    wsGroup.translation_z = 25.0 * (1.0 - absD);
+                    const s = 0.96 + 0.04 * (1.0 - absD);
+                    wsGroup.set_scale(s, s);
+                    wsGroup.rotation_angle_y = 6.0 * absD;
+                    wsGroup.opacity = Math.round(255 * (1.0 - 0.08 * absD));
                 }
             }
         }
@@ -147,6 +152,8 @@ export default class CardTransitionExtension extends Extension {
                 continue;
             try {
                 wsGroup.translation_x = 0;
+                wsGroup.translation_z = 0;
+                wsGroup.rotation_angle_y = 0;
                 wsGroup.set_scale(1.0, 1.0);
                 wsGroup.opacity = 255;
             } catch (_e) {
