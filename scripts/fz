@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+target="$(
+  find . -maxdepth 5 -not -path '*/.git*' 2>/dev/null \
+    | sed 's|^\./||' \
+    | fzf --height=80% --layout=reverse --border=rounded \
+          --prompt="fz ❯ " \
+          --preview='if [ -d {} ]; then ls -la --color=always {}; else bat --style=numbers --color=always --line-range=:120 {} 2>/dev/null || head -n 60 {}; fi' \
+          --preview-window='right:55%:wrap'
+)"
+
+[ -z "$target" ] && exit 0
+
+if [ -d "$target" ]; then
+  echo "cd \"$target\""
+  ls -la --color=auto "$target"
+else
+  mime="$(file --mime-type -b "$target" 2>/dev/null || echo 'text/plain')"
+  case "$mime" in
+    text/*|application/json|application/javascript|application/xml|inode/x-empty)
+      "${EDITOR:-nano}" "$target"
+      ;;
+    *)
+      xdg-open "$target" >/dev/null 2>&1 &
+      ;;
+  esac
+fi

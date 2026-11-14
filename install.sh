@@ -139,6 +139,16 @@ install_cli_tools() {
                 | tar -xz --strip-components=3 -C "$HOME/.local/bin/" fastfetch-linux-amd64/usr/bin/fastfetch 2>/dev/null || true
             chmod +x "$HOME/.local/bin/fastfetch" 2>/dev/null || true
         fi
+
+        if ! command -v fzf >/dev/null 2>&1; then
+            local fzf_ver
+            fzf_ver="$(curl -fsSL https://api.github.com/repos/junegunn/fzf/releases/latest | grep -oP '"tag_name":\s*"v\K[^"]+' | head -n1 || true)"
+            if [ -n "$fzf_ver" ]; then
+                curl -fsSL "https://github.com/junegunn/fzf/releases/download/v${fzf_ver}/fzf-${fzf_ver}-linux_amd64.tar.gz" \
+                    | tar -xz -C "$HOME/.local/bin/" fzf 2>/dev/null || true
+                chmod +x "$HOME/.local/bin/fzf" 2>/dev/null || true
+            fi
+        fi
     fi
 
     # Fallback para pacotes da distro caso algum CLI ainda não esteja disponível (ex: aarch64)
@@ -182,7 +192,7 @@ copy_configs() {
     for s in "$REPO_DIR/scripts/"*; do
         [ -f "$s" ] && cp -f "$s" "$HOME/.local/bin/"
     done
-    chmod +x "$HOME/.local/bin/larper" "$HOME/.local/bin/matrix" "$HOME/.local/bin/pipes" "$HOME/.local/bin/gerar-skybox.py" 2>/dev/null || true
+    chmod +x "$HOME/.local/bin/larper" "$HOME/.local/bin/matrix" "$HOME/.local/bin/pipes" "$HOME/.local/bin/gerar-skybox.py" "$HOME/.local/bin/fz" "$HOME/.local/bin/modo" "$HOME/.local/bin/apply-system-look.sh" 2>/dev/null || true
 
     cp -f "$REPO_DIR/configs/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
     cp -f "$REPO_DIR/configs/fastfetch/logo.txt" "$HOME/.config/fastfetch/logo.txt"
@@ -191,6 +201,12 @@ copy_configs() {
     cp -f "$REPO_DIR/configs/.tmux.conf" "$HOME/.tmux.conf"
     cp -f "$REPO_DIR/configs/.bashrc" "$HOME/.bashrc"
     cp -f "$REPO_DIR/configs/burn-my-windows/profiles/chrollo-larper.conf" "$HOME/.config/burn-my-windows/profiles/1700000000.conf"
+
+    if [ -d "$REPO_DIR/configs/ulauncher" ]; then
+        mkdir -p "$HOME/.config/ulauncher/user-themes/liquid-glass-dark" "$HOME/.config/autostart"
+        cp -rf "$REPO_DIR/configs/ulauncher/"* "$HOME/.config/ulauncher/"
+        [ -f "$REPO_DIR/configs/autostart/ulauncher.desktop" ] && cp -f "$REPO_DIR/configs/autostart/ulauncher.desktop" "$HOME/.config/autostart/ulauncher.desktop"
+    fi
 }
 
 apply_wallpapers() {

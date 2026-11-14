@@ -165,8 +165,17 @@ chmod +x ~/.local/bin/larper ~/.local/bin/matrix ~/.local/bin/pipes
 | `pipes` | Protetor de tela de tubulações neon no terminal (`q` para sair) |
 | `btop` (ou `top`) | Monitor de hardware em Braille com fundo transparente (`q` para sair) |
 | `yazi` (ou `files`) | Gerenciador de arquivos no terminal controlado pelas setas (`q` para sair) |
+| `fz` | Busca fuzzy com preview (`fzf` + `bat`) e abertura rápida no editor / sistema |
+| `fcd` | Navegação rápida de diretórios via `fzf` |
+| `modo [chrollo\|evangelion\|cyber]` | Troca instantânea de preset visual (wallpaper + accent color do GNOME; sem argumento abre menu `fzf`) |
+| `Super + Espaço` | Abre o launcher **Ulauncher** com tema **Liquid Glass Dark** |
 | `Ctrl + Alt + ← / →` | Gira o **Cubo 3D** entre as áreas de trabalho |
 | **Arrastar área vazia do desktop** | Gira o **Cubo 3D** livremente em 360° com o mouse |
+
+> **Boot Splash (Plymouth `genei-ryodan`) + Tela de Login (GDM) + Ulauncher (root):**
+> ```bash
+> sudo bash ~/.local/bin/apply-system-look.sh
+> ```
 
 ---
 
@@ -198,10 +207,15 @@ chmod +x ~/.local/bin/larper ~/.local/bin/matrix ~/.local/bin/pipes
 │   ├── hacker-music.dconf                         # Ocultação automática quando inativo
 │   ├── ptyxis.dconf                               # Fonte Nerd Font + opacidade 84% no terminal
 │   └── enabled-extensions.txt                     # Lista de extensões GNOME utilizadas
+├── plymouth/
+│   └── genei-ryodan/                              # Boot splash custom da Aranha 12 patas (Plymouth)
 ├── scripts/
+│   ├── apply-system-look.sh                       # Instala Ulauncher + aplica Plymouth + fundo GDM (sudo)
+│   ├── fz                                         # Busca fuzzy com preview (fzf + bat)
 │   ├── gerar-skybox.py                            # Gerador do Skybox 360° Gen'ei Ryodan
 │   ├── larper                                     # Launcher do painel 4-em-1 no tmux
 │   ├── matrix                                     # Chuva Matrix em Katakana (verde/roxo/vermelho)
+│   ├── modo                                       # Troca rápida de preset (chrollo / evangelion / cyber)
 │   └── pipes                                      # Animação de tubulações neon no terminal
 ├── wallpapers/
 │   ├── chrollo-hunter-x-hunter.jpg                # Wallpaper principal Chrollo Lucilfer

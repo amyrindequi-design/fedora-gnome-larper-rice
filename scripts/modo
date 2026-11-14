@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+WALL_DIR="${HOME}/Imagens/Wallpapers-Linux"
+if [ ! -d "$WALL_DIR" ] && [ -d "${HOME}/Pictures/Wallpapers-Linux" ]; then
+  WALL_DIR="${HOME}/Pictures/Wallpapers-Linux"
+fi
+
+apply_preset() {
+  local name="$1"
+  local wall=""
+  local accent="yellow"
+
+  case "$name" in
+    chrollo|1)
+      wall="${WALL_DIR}/chrollo-dark-throne.jpg"
+      [ -f "$wall" ] || wall="${WALL_DIR}/chrollo-hunter-x-hunter.jpg"
+      accent="yellow"
+      ;;
+    evangelion|eva|2)
+      wall="${WALL_DIR}/evangelion-nerv-magi-hud.png"
+      accent="red"
+      ;;
+    cyber|kernel|3)
+      wall="${WALL_DIR}/linux-kernel-cyber-hud.png"
+      accent="green"
+      ;;
+    *)
+      echo "Modos disponíveis: chrollo | evangelion | cyber"
+      exit 1
+      ;;
+  esac
+
+  if [ -f "$wall" ]; then
+    gsettings set org.gnome.desktop.background picture-uri "file://${wall}"
+    gsettings set org.gnome.desktop.background picture-uri-dark "file://${wall}"
+  fi
+  gsettings set org.gnome.desktop.interface accent-color "$accent" || true
+  echo "✔ Modo '$name' aplicado ($wall | accent=$accent)"
+}
+
+choice="${1:-}"
+if [ -z "$choice" ]; then
+  choice="$(printf "chrollo\nevangelion\ncyber\n" | fzf --height=35% --layout=reverse --border=rounded --prompt="Modo ❯ ")"
+fi
+
+[ -n "$choice" ] && apply_preset "$choice"

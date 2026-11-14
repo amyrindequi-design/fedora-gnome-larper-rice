@@ -29,8 +29,15 @@ alias htop='btop'
 alias files='yazi'
 alias matrix-chrollo='matrix --purple'
 
-export PATH="$HOME/.local/bin:$PATH"
+# Added by Antigravity CLI installer
+export PATH="/home/amyr/.local/bin:$PATH"
 if [[ $- == *i* ]]; then
-    command -v fastfetch >/dev/null 2>&1 && fastfetch
+    command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
+    fcd() {
+        local dir
+        dir=$(find "${1:-$HOME}" -maxdepth 4 -type d -not -path '*/.*' 2>/dev/null | fzf --height 45% --reverse --border --prompt="cd ❯ ") || return
+        cd "$dir" || return
+    }
+    fastfetch
     command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
 fi

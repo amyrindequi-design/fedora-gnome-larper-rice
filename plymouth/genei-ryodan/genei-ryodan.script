@@ -1,0 +1,39 @@
+Window.SetBackgroundTopColor(0.02, 0.02, 0.03);
+Window.SetBackgroundBottomColor(0.02, 0.02, 0.03);
+
+spider_image = Image("spider-boot.png");
+spider_sprite = Sprite(spider_image);
+spider_sprite.SetX(Window.GetWidth() / 2 - spider_image.GetWidth() / 2);
+spider_sprite.SetY(Window.GetHeight() / 2 - spider_image.GetHeight() / 2);
+spider_sprite.SetZ(10);
+
+progress = 0.0;
+
+fun refresh_callback() {
+    progress += 0.045;
+    pulse = 0.72 + 0.28 * Math.Sin(progress);
+    spider_sprite.SetOpacity(pulse);
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+# Minimalist password prompt for LUKS disk unlock if present
+status = "normal";
+fun display_password_callback(prompt, bullets) {
+    status = "password";
+    prompt_image = Image.Text(prompt, 0.85, 0.85, 0.90);
+    prompt_sprite = Sprite(prompt_image);
+    prompt_sprite.SetX(Window.GetWidth() / 2 - prompt_image.GetWidth() / 2);
+    prompt_sprite.SetY(Window.GetHeight() / 2 + spider_image.GetHeight() / 2 + 24);
+
+    dots = "";
+    for (i = 0; i < bullets; i++) {
+        dots += "• ";
+    }
+    dots_image = Image.Text(dots, 0.77, 0.71, 0.99);
+    dots_sprite = Sprite(dots_image);
+    dots_sprite.SetX(Window.GetWidth() / 2 - dots_image.GetWidth() / 2);
+    dots_sprite.SetY(Window.GetHeight() / 2 + spider_image.GetHeight() / 2 + 52);
+}
+
+Plymouth.SetDisplayPasswordFunction(display_password_callback);
