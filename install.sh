@@ -228,6 +228,18 @@ apply_gnome_settings() {
     gsettings set org.gnome.desktop.interface show-battery-percentage true
     gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrains Mono 10'
 
+    # Tema MacTahoe-Dark (Liquid Glass) pré-compilado do GitHub
+    if [[ ! -d "$HOME/.themes/MacTahoe-Dark" ]]; then
+        mkdir -p "$HOME/.themes"
+        local tahoe_tar="/tmp/MacTahoe-Dark.tar.xz"
+        if curl -fsSL "https://raw.githubusercontent.com/vinceliuice/MacTahoe-gtk-theme/main/release/MacTahoe-Dark.tar.xz" -o "$tahoe_tar"; then
+            tar -xf "$tahoe_tar" -C "$HOME/.themes/" || true
+            rm -f "$tahoe_tar"
+        fi
+    fi
+    gsettings set org.gnome.desktop.interface gtk-theme 'MacTahoe-Dark' || true
+    gsettings set org.gnome.shell.extensions.user-theme name 'MacTahoe-Dark' || true
+
     gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
     gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 
@@ -292,6 +304,8 @@ install_extensions() {
         "caffeine@patapon.info"
         "clipboard-indicator@tudmotu.com"
         "appindicatorsupport@rgcjonas.gmail.com"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "quick-settings-audio-panel@rayzeq.github.io"
     )
 
     for UUID in "${uuids[@]}"; do
@@ -350,6 +364,8 @@ desired = [
     'compiz-windows-effect@hermes83.github.com',
     'hacker-transition@amyrindequi.github.io',
     'hacker-music@amyrindequi.github.io',
+    'user-theme@gnome-shell-extensions.gcampax.github.com',
+    'quick-settings-audio-panel@rayzeq.github.io',
 ]
 cur = subprocess.check_output(['gsettings', 'get', 'org.gnome.shell', 'enabled-extensions'], text=True).strip()
 exts = [] if cur == '@as []' else ast.literal_eval(cur)
