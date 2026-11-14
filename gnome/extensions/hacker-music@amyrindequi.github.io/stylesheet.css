@@ -206,3 +206,102 @@
     letter-spacing: 0.2px;
 }
 
+/* Liquid Glass Quick Settings & Popups */
+.popup-menu-content {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(28, 31, 40, 0.84);
+    background-gradient-end: rgba(16, 18, 24, 0.90);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
+    box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.45);
+}
+
+.popup-menu-item {
+    border-radius: 12px;
+    transition-duration: 150ms;
+}
+
+.popup-menu-item:active,
+.popup-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.quick-settings {
+    padding: 18px;
+    border-radius: 28px;
+}
+
+.quick-settings .icon-button,
+.quick-settings .button {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.90);
+    transition-duration: 160ms;
+}
+
+.quick-settings .icon-button:hover,
+.quick-settings .button:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #ffffff;
+}
+
+.quick-toggle,
+.quick-toggle-has-menu .quick-menu-toggle {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid transparent;
+    color: rgba(255, 255, 255, 0.88);
+    transition-duration: 160ms;
+}
+
+.quick-toggle:hover,
+.quick-toggle-has-menu .quick-menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+}
+
+.quick-toggle:checked,
+.quick-toggle-has-menu .quick-menu-toggle:checked {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(255, 255, 255, 0.28);
+    background-gradient-end: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    color: #ffffff;
+}
+
+.quick-toggle:checked:hover,
+.quick-toggle-has-menu .quick-menu-toggle:checked:hover {
+    background-gradient-start: rgba(255, 255, 255, 0.35);
+    background-gradient-end: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+}
+
+.quick-toggle-menu {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+}
+
+.quick-toggle-menu:hover {
+    background-color: rgba(255, 255, 255, 0.11);
+}
+
+.quick-slider .slider {
+    color: #ffffff;
+    -barlevel-height: 5px;
+    -barlevel-background-color: rgba(255, 255, 255, 0.16);
+    -barlevel-active-background-color: rgba(255, 255, 255, 0.90);
+}
+
+.message {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+}
+
+.message:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+
