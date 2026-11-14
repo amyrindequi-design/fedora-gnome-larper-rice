@@ -26,6 +26,9 @@ else
 fi
 
 echo "[2/3] Aplicando tema Plymouth 'genei-ryodan'..."
+if [[ ! -f /usr/lib64/plymouth/script.so ]]; then
+    dnf install -y plymouth-plugin-script
+fi
 if [[ -d "$REPO_PLYMOUTH" ]]; then
     mkdir -p /usr/share/plymouth/themes/genei-ryodan
     cp -f "$REPO_PLYMOUTH"/* /usr/share/plymouth/themes/genei-ryodan/
