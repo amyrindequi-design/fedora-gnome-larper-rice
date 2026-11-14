@@ -213,9 +213,9 @@ apply_wallpapers() {
     for w in "$REPO_DIR/wallpapers/"*; do
         [ -f "$w" ] && cp -f "$w" "$WALLPAPER_DIR/"
     done
-    cp -f "$REPO_DIR/wallpapers/chrollo-hunter-x-hunter.jpg" "$HOME/.config/background"
-    gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_DIR}/chrollo-hunter-x-hunter.jpg"
-    gsettings set org.gnome.desktop.background picture-uri-dark "file://${WALLPAPER_DIR}/chrollo-hunter-x-hunter.jpg"
+    cp -f "$REPO_DIR/wallpapers/chrollo-dark-throne.jpg" "$HOME/.config/background"
+    gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_DIR}/chrollo-dark-throne.jpg"
+    gsettings set org.gnome.desktop.background picture-uri-dark "file://${WALLPAPER_DIR}/chrollo-dark-throne.jpg"
 }
 
 apply_gnome_settings() {
