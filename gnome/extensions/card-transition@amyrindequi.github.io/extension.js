@@ -1,5 +1,3 @@
-import GLib from 'gi://GLib';
-
 import {WorkspaceAnimationController} from 'resource:///org/gnome/shell/ui/workspaceAnimation.js';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
@@ -48,14 +46,18 @@ export default class CardTransitionExtension extends Extension {
 
         const session = {
             controller,
-            timerId: 0,
             monitorEntries: [],
         };
 
         for (const m of monitors) {
             const wsGroups = m._workspaceGroups ?? [];
-            for (const wsGroup of wsGroups)
+            for (const wsGroup of wsGroups) {
                 wsGroup.set_pivot_point(0.5, 0.5);
+                wsGroup.clip_to_allocation = true;
+                const parent = wsGroup.get_parent();
+                if (parent)
+                    parent.set_child_above_sibling(wsGroup, null);
+            }
 
             const entry = {
                 monitorGroup: m,
@@ -76,13 +78,6 @@ export default class CardTransitionExtension extends Extension {
 
         this._activeSession = session;
         this._updateCards(session);
-
-        session.timerId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 16, () => {
-            if (this._activeSession !== session)
-                return GLib.SOURCE_REMOVE;
-            this._updateCards(session);
-            return GLib.SOURCE_CONTINUE;
-        });
     }
 
     _updateCards(session) {
@@ -100,30 +95,23 @@ export default class CardTransitionExtension extends Extension {
                 if (!wsGroup)
                     continue;
 
-                // Keep higher-index cards stacked above lower-index cards.
-                const parent = wsGroup.get_parent();
-                if (parent)
-                    parent.set_child_above_sibling(wsGroup, null);
-
                 const delta = i - progress;
                 const absD = clamp(Math.abs(delta), 0.0, 1.0);
 
                 if (delta < 0) {
-                    // Card underneath: recedes in 3D depth with a subtle fan tilt.
+                    // Card underneath: stays stacked behind while shrinking & tilting gently.
                     wsGroup.translation_x = absD * width * 0.72;
-                    wsGroup.translation_z = -90.0 * absD;
-                    const s = 1.0 - 0.10 * absD;
+                    const s = 1.0 - 0.09 * absD;
                     wsGroup.set_scale(s, s);
-                    wsGroup.rotation_angle_y = -7.5 * absD;
-                    wsGroup.opacity = Math.round(255 * (1.0 - 0.40 * absD));
+                    wsGroup.rotation_angle_y = -4.0 * absD;
+                    wsGroup.opacity = Math.round(255 * (1.0 - 0.38 * absD));
                 } else {
-                    // Incoming card: flips/glides cleanly over the deck.
-                    wsGroup.translation_x = -absD * width * 0.05;
-                    wsGroup.translation_z = 25.0 * (1.0 - absD);
+                    // Incoming card: glides cleanly over the lower card without Z-fighting.
+                    wsGroup.translation_x = -absD * width * 0.04;
                     const s = 0.96 + 0.04 * (1.0 - absD);
                     wsGroup.set_scale(s, s);
-                    wsGroup.rotation_angle_y = 6.0 * absD;
-                    wsGroup.opacity = Math.round(255 * (1.0 - 0.08 * absD));
+                    wsGroup.rotation_angle_y = 3.5 * absD;
+                    wsGroup.opacity = Math.round(255 * (1.0 - 0.06 * absD));
                 }
             }
         }
@@ -156,6 +144,7 @@ export default class CardTransitionExtension extends Extension {
                 wsGroup.rotation_angle_y = 0;
                 wsGroup.set_scale(1.0, 1.0);
                 wsGroup.opacity = 255;
+                wsGroup.clip_to_allocation = false;
             } catch (_e) {
                 // Ignore if tearing down.
             }
@@ -171,10 +160,6 @@ export default class CardTransitionExtension extends Extension {
             return;
         this._activeSession = null;
 
-        if (session.timerId) {
-            GLib.source_remove(session.timerId);
-            session.timerId = 0;
-        }
         for (const entry of session.monitorEntries)
             this._cleanupMonitorEntry(entry);
         session.monitorEntries.length = 0;
