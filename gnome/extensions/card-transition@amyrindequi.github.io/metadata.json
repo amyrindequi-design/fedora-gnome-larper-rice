@@ -1,0 +1,8 @@
+{
+  "uuid": "card-transition@amyrindequi.github.io",
+  "name": "Card Stack Workspace Transition",
+  "description": "Minimalist stacked card transition between workspaces.",
+  "shell-version": ["45", "46", "47", "48", "49", "50", "51"],
+  "url": "https://github.com/amyrindequi-design/fedora-gnome-larper-rice",
+  "version": 1
+}
